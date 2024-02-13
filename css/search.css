@@ -1,0 +1,206 @@
+@charset "utf-8";
+/*
+
+	Last Updated: 2010.1.18
+	--------------------------------
+	- Table of Contents -
+
+    1. RESET
+	  
+    2. BODY
+
+	3. CLASS
+	
+	4. HEAD
+
+	5. CONTENTS
+	
+	6. FOOTER
+
+	--------------------------------
+*/
+
+
+
+/* ----------------
+	1. RESET
+---------------- */
+
+* {
+	margin:0px;
+	padding:0px;
+	scrollbar-arrow-color: #FEE6E6;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-face-color: #FBB5BB;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #FFFFFF;
+	scrollbar-track-color: #FEE6E6;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, address, blockquote, pre, div,
+dl, ol, ul, li,
+form, input, select, textarea, fieldset, legend {
+	margin: 0;
+	padding: 0;
+}
+
+form, input, textarea {
+	margin-right: 3px;
+	margin-left: 3px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 3px;
+	padding-right: 3px;
+	padding-bottom: 3px;
+	padding-left: 3px;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, address, blockquote, pre, div,
+dl, ol, ul,
+th {
+	font-weight: normal;
+	font-style: normal;
+}
+
+img {
+	border: none;
+	visibility: visible;
+}
+
+ul {
+list-style: none;
+}
+
+
+ruby {
+ruby-align: distribute-space;
+ruby-overhang: auto;
+ruby-position: above;
+}
+
+
+
+
+/* ----------------
+	2. BODY
+---------------- */
+
+body {
+	font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3";
+	font-size:10px;
+	margin:0;
+	padding:0;
+	line-height:1.8em;
+	background-color: #FFFFFF;
+	color: #333333;
+}
+
+table {
+	font-size:12px;
+	vertical-align: top;
+	padding: 0px;
+}
+
+a { text-decoration:none; }
+a:link {
+	color: #4D4D4D;
+}
+a:visited { color: #333333; }
+a:hover {
+	color:#FF0000;
+}
+
+input, select, textarea {
+	color: #333333;
+	font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3";
+}
+
+
+/* ----------------
+	3. CLASS
+---------------- */
+
+.clearfix:after {
+	font-size: 0;
+	line-height: 0;
+	clear: both;
+	height: 0px;
+	visibility: hidden;
+}
+
+.clearfix { display: inline-block; }
+
+.clearBoth {
+	clear: both;
+/*	border: 1px solid #00F;*/
+}
+
+/* Hides from IE-mac \*/
+* html .clearfix { height:1%; }
+.clearfix { display: block; }
+/* End Hide from IE-mac */
+
+.red { color:#FF0000; }
+
+.none{
+display:none;
+}
+
+
+
+/* ----------------
+	12.KENSAKU
+---------------- */
+
+#search {
+	width: 99%;
+	border: 1px solid #996600;
+	margin: 5px;
+	padding: 0px;
+}
+
+#search th {
+	font-weight: bold;
+	background-color: #996600;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	text-align: left;
+	padding-left: 3px;
+	color: #FFFFFF;
+}
+
+#search td {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	text-align: left;
+	padding-left: 3px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: dotted;
+	border-bottom-style: dotted;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+}
+
+/* ----------------
+	ボタン群
+---------------- */
+.button01 a{
+	padding: 2px;
+	background-color: #339900;
+	font-family: "FOT-スキップ Std B";
+	font-size: 1.1em;
+	color: #FFFFFF;
+}
+
+.button01 a:hover {
+	padding: 2px;
+	background-color: #FF6600;
+	font-family: "FOT-スキップ Std B";
+	font-size: 1.1em;
+	color: #FFFFFF;
+}
