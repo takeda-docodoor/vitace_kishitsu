@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - $PWD:/var/www/html
+      - ./htdocs:/var/www/html
     ports:
       - 8080:80
 
@@ -18,7 +18,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: roominr
-      MYSQL_DATABASE: kishitsu_diag
+      MYSQL_DATABASE: ddtest004_vakishitsu
       MYSQL_USER: roominr
       MYSQL_PASSWORD: roominr
     volumes:
