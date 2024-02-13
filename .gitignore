@@ -35,3 +35,6 @@ db
 *.bk
 _bk_*
 _docs
+
+# config
+htdocs/config.php
