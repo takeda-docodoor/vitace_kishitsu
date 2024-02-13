@@ -46,7 +46,7 @@ $link1 = db_connect1();
 //********************************************************************
 if ( isset($_POST['syori']) ) {
   if ( $_POST['syori'] == '診断' ) {
-	  
+
   	  if ( $_POST['aky_year'] > '0' ) {
         $_SESSION['aky_year'] = $_POST['aky_year'];
 	  }
@@ -56,7 +56,7 @@ if ( isset($_POST['syori']) ) {
   	  if ( $_POST['aky_day'] != '' ) {
         $_SESSION['aky_day'] = $_POST['aky_day'];
 	  }
-	  
+
   }
 }
 ?>
@@ -92,9 +92,9 @@ if ( isset($_POST['syori']) ) {
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        
-        
-        
+
+
+
 <script language="JavaScript" type="text/javascript">
 function navi_win( Masterid ) {
         self.window.name="main"
@@ -208,7 +208,7 @@ td.huntsys1 { text-align: center; }
       <div class="row">
         <div class="col-md-3">
 
-                
+
 		  <?php
 			$aky_date = $_SESSION['aky_year'] . '-' . $_SESSION['aky_month'] . '-' . $_SESSION['aky_day'];
 			$where101 = '';
@@ -223,7 +223,7 @@ td.huntsys1 { text-align: center; }
 		  ?>
           <!-- Profile Image -->
           <div class="box box-primary">
-           
+
           <?php if ( $num_rows101 > '0' ) { ?>
             <?php $aurakoyomi = mysqli_fetch_array( $result101 ); ?>
             <div class="box-body box-profile">
@@ -257,7 +257,7 @@ td.huntsys1 { text-align: center; }
         <div class="col-md-3">
           <!-- Profile Image -->
           <div class="box box-primary">
-           
+
             <?php $aurakoyomi = mysqli_fetch_array( $result101 ); ?>
             <div class="box-body box-profile">
               <img class="img-responsive" src="../../dist/img/vitace_group.png">
