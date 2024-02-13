@@ -55,10 +55,10 @@ $link1 = db_connect1();
 //********************************************************************
 if ( isset($_GET['action']) ) {
   if ( $_GET['action'] == 'attendancedel' ) {
-	  
+
 	$sql = "delete from attendance where attendance_id = '" . $_GET['attendance_id'] . "'";
 	$result = mysqli_query( $link1, $sql );
-	  
+
   }
 }
 
@@ -96,9 +96,9 @@ if ( isset($_GET['action']) ) {
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        
-        
-        
+
+
+
 <script language="JavaScript" type="text/javascript">
 function navi_win( Masterid ) {
         self.window.name="main"
@@ -254,7 +254,7 @@ td.huntsys1 { text-align: center; }
                 </tr>
                 </thead>
                 <tbody>
-                
+
 			  <?php
 				$where101 = '';
 				$sql101 = '';
@@ -262,8 +262,8 @@ td.huntsys1 { text-align: center; }
 				$where101 .= "kfm_year > '" . '0' . "' and ";
 				$where101 .= '1 = 1';
 				$sql101 = "select * from koyomiform where $where101 order by kfm_year";
-				$result101 = mysqli_query( $link1, $sql101 ) or die('query error635' . mysql_error());
-		        
+				$result101 = mysqli_query( $link1, $sql101 ) or die('query error635' . mysqli_error($link1));
+
 			  ?>
 			  <?php $m = 0; while ( $koyomiform = mysqli_fetch_array( $result101 ) ) { ?>
 				<tr>
@@ -293,8 +293,8 @@ td.huntsys1 { text-align: center; }
 				  <a href="javascript:navi_win1()"><button class="btn btn-primary">新規追加</button></a>
               </div>
             </div>
-            
-            
+
+
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
@@ -304,7 +304,7 @@ td.huntsys1 { text-align: center; }
         <!-- /.col -->
       </div>
       <!-- /.row -->
-      
+
     </section>
     <!-- /.content -->
   </div>

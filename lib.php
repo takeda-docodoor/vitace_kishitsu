@@ -55,17 +55,17 @@ function calc_handling( $sub_total, $payment_option ) {
 	case 0: // クレジットカード
 		if ( $sub_total >= 1500 )
 			return 0;
-		else 
+		else
 			return 525;
 	case 1: // 銀行振り込み
 		if ( $sub_total >= 1500 )
 			return 0;
-		else 
+		else
 			return 525;
 	case 2: // 代引き
 		if ( $sub_total >= 1500 )
 			return 0 + ceil( $sub_total * 0.05 );
-		else 
+		else
 			return 525 + ceil( $sub_total * 0.05 );
 	}
 }
@@ -105,7 +105,7 @@ function get_jyear( $wyear ) {
 		$nengo = '3';
 		$jyear = $wyear - 1925;
 	}
-	
+
 	if ( $wyear < '1925' ) {
 		$nengo = '0';
 		$jyear = '0';
@@ -170,7 +170,7 @@ function make_category( $parent_id, $order, $sort, $value, $indent ) {
 	while ( $category = mysql_fetch_array( $result ) ) {
 		if ( $category['category_id'] == $value )
 			echo "<option value=${category['category_id']} selected>$indent${category['category_name']}\n";
-		else 
+		else
 			echo "<option value=${category['category_id']}>$indent${category['category_name']}\n";
 
 		make_category( $category['category_id'], $order, $sort, $value, $indent . '&nbsp;' );
@@ -189,17 +189,17 @@ function fgetcsv_reg (&$handle, $length = null, $d = ',', $e = '"') {
 		$itemcnt = preg_match_all('/'.$e.'/', $_line, $dummy);
 		if ($itemcnt % 2 == 0) $eof = true;
 	}
-	
+
 	$_csv_line = preg_replace('/(?:\\r\\n|[\\r\\n])?$/', $d, trim($_line));
 	$_csv_pattern = '/('.$e.'[^'.$e.']*(?:'.$e.$e.'[^'.$e.']*)*'.$e.'|[^'.$d.']*)'.$d.'/';
 	preg_match_all($_csv_pattern, $_csv_line, $_csv_matches);
 	$_csv_data = $_csv_matches[1];
-	
+
 	for($_csv_i=0;$_csv_i<count($_csv_data);$_csv_i++){
 		$_csv_data[$_csv_i]=preg_replace('/^'.$e.'(.*)'.$e.'$/s','$1',$_csv_data[$_csv_i]);
 		$_csv_data[$_csv_i]=str_replace($e.$e, $e, $_csv_data[$_csv_i]);
 	}
-	
+
 	return empty($_line) ? false : $_csv_data;
 }
 
@@ -207,20 +207,20 @@ function fgetcsv_reg (&$handle, $length = null, $d = ',', $e = '"') {
 function make_calend( $m1_ymd ) {
   $m1w  = date("w",strtotime($m1_ymd));
   $mend  = date('t', strtotime($m1_ymd));
-  
+
   $m1y  = date("Y",strtotime($m1_ymd));
   $m1m  = date("m",strtotime($m1_ymd));
-  
+
   $bm1_ymd = date('Y-m-d', strtotime($m1_ymd . ' -1 month'));
   $bmend  = date('t', strtotime($bm1_ymd));
-  
+
   $bm1y  = date("Y",strtotime($bm1_ymd));
   $bm1m  = date("m",strtotime($bm1_ymd));
-  
+
   $nm1_ymd = date('Y-m-d', strtotime($m1_ymd . ' +1 month'));
   $nm1y  = date("Y",strtotime($nm1_ymd));
   $nm1m  = date("m",strtotime($nm1_ymd));
-  
+
   if ( $m1w == '1' ) {
     $w11 = '1'; $w11d =  $m1y . '-' . $m1m . '-01';
     $w12 = '2'; $w12d =  $m1y . '-' . $m1m . '-02';
@@ -294,7 +294,7 @@ function make_calend( $m1_ymd ) {
 	$w66 = '0'; $w66d = '0';
 	$w67 = '0'; $w67d = '0';
   }
-  
+
   if ( $m1w == '2' ) {
     $w11 = $bmend; $w11d =  $bm1y . '-' . $bm1m . '-' . $w11;
     $w12 = '1'; $w12d =  $m1y . '-' . $m1m . '-01';
@@ -365,7 +365,7 @@ function make_calend( $m1_ymd ) {
 	$w66 = '0'; $w66d = '0';
 	$w67 = '0'; $w67d = '0';
   }
-  
+
   if ( $m1w == '3' ) {
     $w11 = $bmend - 1; $w11d =  $bm1y . '-' . $bm1m . '-' . $w11;
     $w12 = $bmend; $w12d =  $bm1y . '-' . $bm1m . '-' . $w12;
@@ -433,7 +433,7 @@ function make_calend( $m1_ymd ) {
 	$w66 = '0'; $w66d = '0';
 	$w67 = '0'; $w67d = '0';
   }
-  
+
   if ( $m1w == '4' ) {
     $w11 = $bmend - 2; $w11d =  $bm1y . '-' . $bm1m . '-' . $w11;
     $w12 = $bmend - 1; $w12d =  $bm1y . '-' . $bm1m . '-' . $w12;
@@ -498,7 +498,7 @@ function make_calend( $m1_ymd ) {
 	$w66 = '0'; $w66d = '0';
 	$w67 = '0'; $w67d = '0';
   }
-  
+
   if ( $m1w == '5' ) {
     $w11 = $bmend - 3; $w11d =  $bm1y . '-' . $bm1m . '-' . $w11;
     $w12 = $bmend - 2; $w12d =  $bm1y . '-' . $bm1m . '-' . $w12;
@@ -560,7 +560,7 @@ function make_calend( $m1_ymd ) {
 	$w66 = '0'; $w66d = '0';
 	$w67 = '0'; $w67d = '0';
   }
-  
+
   if ( $m1w == '6' ) {
     $w11 = $bmend - 4; $w11d =  $bm1y . '-' . $bm1m . '-' . $w11;
     $w12 = $bmend - 3; $w12d =  $bm1y . '-' . $bm1m . '-' . $w12;
@@ -640,7 +640,7 @@ function make_calend( $m1_ymd ) {
 	  $w67 = '6'; $w67d =  $nm1y . '-' . $nm1m . '-06';
 	}
   }
-  
+
   if ( $m1w == '0' ) {
     $w11 = $bmend - 5; $w11d =  $bm1y . '-' . $bm1m . '-' . $w11;
     $w12 = $bmend - 4; $w12d =  $bm1y . '-' . $bm1m . '-' . $w12;
@@ -717,9 +717,9 @@ function make_calend( $m1_ymd ) {
 	  $w67 = '5'; $w67d =  $nm1y . '-' . $nm1m . '-05';
 	}
   }
-  
+
   $_SESSION['mwdate']  = array($w11,$w12,$w13,$w14,$w15,$w16,$w17,$w21,$w22,$w23,$w24,$w25,$w26,$w27,$w31,$w32,$w33,$w34,$w35,$w36,$w37,$w41,$w42,$w43,$w44,$w45,$w46,$w47,$w51,$w52,$w53,$w54,$w55,$w56,$w57,$w61,$w62,$w63,$w64,$w65,$w66,$w67);
-  
+
   $_SESSION['mwymd']  = array($w11d,$w12d,$w13d,$w14d,$w15d,$w16d,$w17d,$w21d,$w22d,$w23d,$w24d,$w25d,$w26d,$w27d,$w31d,$w32d,$w33d,$w34d,$w35d,$w36d,$w37d,$w41d,$w42d,$w43d,$w44d,$w45d,$w46d,$w47d,$w51d,$w52d,$w53d,$w54d,$w55d,$w56d,$w57d,$w61d,$w62d,$w63d,$w64d,$w65d,$w66d,$w67d);
 }
 

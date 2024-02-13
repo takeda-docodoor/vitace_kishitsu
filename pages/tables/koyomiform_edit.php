@@ -40,23 +40,23 @@ $mstmsg = '';
 if ( isset($_GET['mstact']) ) {
   if ( $_GET['mstact'] != '' ) {
     $_SESSION['mstact'] = $_GET['mstact'];
-	
+
 	if (  $_SESSION['mstact'] == 'mstedit' ) {
   	  if ( $_GET['masterid'] != '' ) {
         $_SESSION['masterid'] = $_GET['masterid'];
-		
+
 
 		$where1 = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from koyomiform where koyomiform_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
-		$koyomiform = mysqli_fetch_array( $result1 );		
-		
+		$koyomiform = mysqli_fetch_array( $result1 );
+
       }
 	}
 	if (  $_SESSION['mstact'] == 'mstnew' ) {
-		
+
   	  if ( $_GET['masterid'] != '' ) {
         $_SESSION['masterid'] = '0';
 
@@ -68,16 +68,16 @@ if ( isset($_GET['mstact']) ) {
 		$koyomiform = mysqli_fetch_array( $result1 );
 	  }
 	}
-	
+
   }
 }
 
 //********************************************************************
 if ( isset($_POST['syori']) ) {
   if ( $_POST['syori'] == '登録' ) {
-	  
+
 	$kfm_chgyear = $_POST['kfm_year'] . '-' . $_POST['chgyear_month'] . '-' . $_POST['chgyear_day'];
-	  
+
 	$kfm_chgjan = $_POST['kfm_year'] . '-01-' . $_POST['chgjan_day'];
 	$kfm_convjan = $_POST['kfm_year'] . '-01-' . $_POST['convjan_day'];
 	$kfm_chgfeb = $_POST['kfm_year'] . '-02-' . $_POST['chgfeb_day'];
@@ -102,10 +102,10 @@ if ( isset($_POST['syori']) ) {
 	$kfm_convnov = $_POST['kfm_year'] . '-11-' . $_POST['convnov_day'];
 	$kfm_chgdec = $_POST['kfm_year'] . '-12-' . $_POST['chgdec_day'];
 	$kfm_convdec = $_POST['kfm_year'] . '-12-' . $_POST['convdec_day'];
-	  
+
 	if (  $_SESSION['mstact'] == 'mstnew' ) {
-		
-		
+
+
 		$sql = "insert into koyomiform (
 			kfm_year,
 			kfm_chgyear,
@@ -165,19 +165,19 @@ if ( isset($_POST['syori']) ) {
 			'" . '' . "',
 			'" . '0' . "'
 		)";
-		$result = mysqli_query( $link1, $sql ) or die('query error164' . mysql_error());
+		$result = mysqli_query( $link1, $sql ) or die('query error164' . mysqli_error($link1));
 		$_SESSION['masterid'] = mysqli_insert_id( $link1 );
 		$_SESSION['mstact'] = 'mstedit';
-	
+
 		$where = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from koyomiform where koyomiform_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
 		$koyomiform = mysqli_fetch_array( $result1 );
-		
-		
-	
+
+
+
 	} else {
 
 		$sql = "update koyomiform set
@@ -208,21 +208,21 @@ if ( isset($_POST['syori']) ) {
 					kfm_chgdec = '" . mysqli_real_escape_string( $link1, $kfm_chgdec ) . "',
 					kfm_convdec = '" . mysqli_real_escape_string( $link1, $kfm_convdec ) . "'
 			where koyomiform_id = '" . $_SESSION['masterid'] . "'";
-		$result = mysqli_query( $link1, $sql ) or die('query error206' . mysql_error());
-		
+		$result = mysqli_query( $link1, $sql ) or die('query error206' . mysqli_error($link1));
+
 		$where1 = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from koyomiform where koyomiform_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
 		$koyomiform = mysqli_fetch_array( $result1 );
-		
-		
-		
+
+
+
 	}
 
 	$mstmsg = '登録しました。';
-		
+
   }
 }
 

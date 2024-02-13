@@ -22,8 +22,8 @@ $now_ymd = $nyear . '-' . $nmonth . '-' . $nday;
 //
 $login_st = 0;    // ログイン初期化
 
-$error = '';  
-$_SESSION['upname1'] = '';    
+$error = '';
+$_SESSION['upname1'] = '';
 
 
 
@@ -41,24 +41,24 @@ $mstmsg = '';
 if ( isset($_GET['mstact']) ) {
   if ( $_GET['mstact'] != '' ) {
     $_SESSION['mstact'] = $_GET['mstact'];
-	
+
 	if (  $_SESSION['mstact'] == 'mstedit' ) {
   	  if ( $_GET['masterid'] != '' ) {
         $_SESSION['masterid'] = $_GET['masterid'];
-		
+
 
 		$where1 = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from kishitsucert where kishitsucert_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
-		$kishitsucert = mysqli_fetch_array( $result1 );		
-		  
-		
+		$kishitsucert = mysqli_fetch_array( $result1 );
+
+
       }
 	}
 	if (  $_SESSION['mstact'] == 'mstnew' ) {
-		
+
   	  if ( $_GET['masterid'] != '' ) {
         $_SESSION['masterid'] = '0';
 
@@ -70,36 +70,36 @@ if ( isset($_GET['mstact']) ) {
 		$kishitsucert = mysqli_fetch_array( $result1 );
 	  }
 	}
-	
+
   }
 }
 
 //********************************************************************
 if ( isset($_POST['syori']) ) {
   if ( $_POST['syori'] == '登録' ) {
-	  
+
 	$upload_dir = "../../certimg/";
-	
+
 	if (isset($_FILES['file']) && $_FILES['file']['tmp_name']!="") { //添付ファイルをアップロードしていたら
-	
-			  
+
+
 		  $file_path = $upload_dir.$_FILES['file']['name'];
 		  $_SESSION['upname1'] = $_FILES['file']['name'];
-		
+
 		echo $file_path;
-		
+
 		if (move_uploaded_file($_FILES['file']['tmp_name'],$file_path)) {
-                  chmod($file_path,0644);  
-				  $errmsg .= '「' . $_FILES['file']['name'] . '」をアップロードしました。'; 
+                  chmod($file_path,0644);
+				  $errmsg .= '「' . $_FILES['file']['name'] . '」をアップロードしました。';
               } else {
-                 $errmsg .= 'ファイルのアップロードに失敗しました。<br />';    
-			      $_SESSION['upname1'] = '';    
-              }  
+                 $errmsg .= 'ファイルのアップロードに失敗しました。<br />';
+			      $_SESSION['upname1'] = '';
+              }
 	}
-	  
+
 	  if (  $_SESSION['mstact'] == 'mstnew' ) {
-			
-		
+
+
 		$sql = "insert into kishitsucert (
 			ksc_memberid,
 			ksc_country,
@@ -119,24 +119,24 @@ if ( isset($_POST['syori']) ) {
 			'" . mysqli_real_escape_string( $link1, $_POST['ksc_certsend'] ) . "',
 			'" . '' . "'
 		)";
-		$result = mysqli_query( $link1, $sql ) or die('query error120' . mysql_error());
+		$result = mysqli_query( $link1, $sql ) or die('query error120' . mysqli_error($link1));
 		$_SESSION['masterid'] = mysqli_insert_id( $link1 );
 		$_SESSION['mstact'] = 'mstedit';
-	
+
 		$where = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from kishitsucert where kishitsucert_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
 		$kishitsucert = mysqli_fetch_array( $result1 );
-		
-		
+
+
         $mstmsg = '登録しました。';
-	
+
 	  } else {
 
         if ( $_SESSION['upname1'] == '' ) { $_SESSION['upname1'] = $_POST['ksc_certificate']; }
-		  
+
 		$sql = "update kishitsucert set
 					ksc_memberid = '" . mysqli_real_escape_string( $link1, $_POST['ksc_memberid'] ) . "',
 					ksc_country = '" . mysqli_real_escape_string( $link1, $_POST['ksc_country'] ) . "',
@@ -146,21 +146,21 @@ if ( isset($_POST['syori']) ) {
 					ksc_certificate = '" . mysqli_real_escape_string( $link1, $_SESSION['upname1'] ) . "',
 					ksc_certsend = '" . mysqli_real_escape_string( $link1, $_POST['ksc_certsend'] ) . "'
 			where kishitsucert_id = '" . $_SESSION['masterid'] . "'";
-		$result = mysqli_query( $link1, $sql ) or die('query error147' . mysql_error());
-		
+		$result = mysqli_query( $link1, $sql ) or die('query error147' . mysqli_error($link1));
+
 		$where1 = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from kishitsucert where kishitsucert_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
 		$kishitsucert = mysqli_fetch_array( $result1 );
-		
-		
+
+
         $mstmsg = '登録しました。';
-		
+
 	  }
 
-		
+
   }
 }
 
@@ -174,7 +174,7 @@ $member_tbl[] = '';
 $where51 .= "member_id > '" . '0' . "' and ";
 $where51 .= '1 = 1';
 $sql51 = "select * from member where $where51 order by member_id";
-$result51 = mysqli_query( $link1, $sql51 ) or die('query error175' . mysql_error());
+$result51 = mysqli_query( $link1, $sql51 ) or die('query error175' . mysqli_error($link1));
 
 
 $n = 0; while ( $member51 = mysqli_fetch_array( $result51 ) ) {

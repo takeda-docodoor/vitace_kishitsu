@@ -47,7 +47,7 @@ $_SESSION['aky_day'] = '';
 //********************************************************************
 if ( isset($_POST['syori']) ) {
   if ( $_POST['syori'] == '診断' ) {
-	  
+
   	  if ( $_POST['aky_year'] > '0' ) {
         $_SESSION['aky_year'] = $_POST['aky_year'];
 	  }
@@ -57,7 +57,7 @@ if ( isset($_POST['syori']) ) {
   	  if ( $_POST['aky_day'] != '' ) {
         $_SESSION['aky_day'] = $_POST['aky_day'];
 	  }
-	  
+
   }
 }
 ?>
@@ -93,9 +93,9 @@ if ( isset($_POST['syori']) ) {
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        
-        
-        
+
+
+
 <script language="JavaScript" type="text/javascript">
 function navi_win( Masterid ) {
         self.window.name="main"
@@ -220,7 +220,7 @@ td.huntsys1 { text-align: center; }
                   <th class="huntsys1" colspan="2">日干支(day)</th>
                 </tr>
                 </thead>
-                
+
 				  <?php
 					$aky_date = $_SESSION['aky_year'] . '-' . $_SESSION['aky_month'] . '-' . $_SESSION['aky_day'];
 					$where101 = '';
@@ -229,7 +229,7 @@ td.huntsys1 { text-align: center; }
 					$where101 .= "aky_date = '" . $aky_date . "' and ";
 					$where101 .= '1 = 1';
 					$sql101 = "select * from aurakoyomi where $where101";
-					$result101 = mysqli_query( $link1, $sql101 ) or die('query error274' . mysql_error());
+					$result101 = mysqli_query( $link1, $sql101 ) or die('query error274' . mysqli_error($link1));
 	  				$num_rows101 = mysqli_num_rows( $result101 );
 
 				  ?>
@@ -264,8 +264,8 @@ td.huntsys1 { text-align: center; }
                 <?php } ?>
               </table>
             </div>
-            
-            
+
+
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
@@ -275,7 +275,7 @@ td.huntsys1 { text-align: center; }
         <!-- /.col -->
       </div>
       <!-- /.row -->
-      
+
       <div class="row">
         <div class="col-xs-12">
           <div class="box_sample">
@@ -310,11 +310,11 @@ td.huntsys1 { text-align: center; }
 				  <td class="huntsys1" bgcolor="#FFFFFF">金(ー)metal</td>
 				  <td class="huntsys1" bgcolor="#949494">水(ー)water</td>
 				</tr>
-               
+
                 </tbody>
               </table>
             </div>
-            
+
             <!-- /.box-body -->
           </div>
             <img src="../../dist/img/roominr_12table.png" alt="干支画像">
@@ -324,7 +324,7 @@ td.huntsys1 { text-align: center; }
         </div>
         <!-- /.col -->
       </div>
-      
+
     </section>
     <!-- /.content -->
   </div>

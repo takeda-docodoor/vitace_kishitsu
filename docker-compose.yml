@@ -32,9 +32,6 @@ services:
       - "8082:80"  # PHPMyAdminのポート
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: roominr
-      MYSQL_USER: roominr
-      MYSQL_PASSWORD: roominr
     depends_on:
       - db
 

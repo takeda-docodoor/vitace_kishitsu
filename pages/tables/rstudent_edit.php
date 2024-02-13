@@ -42,7 +42,7 @@ $mstmsg = '';
 if ( isset($_GET['mstact']) ) {
   if ( $_GET['mstact'] != '' ) {
     $_SESSION['mstact'] = $_GET['mstact'];
-	
+
 		if (  $_SESSION['mstact'] == 'mstedit' ) {
 	  	  if ( $_GET['masterid'] != '' ) {
 	        $_SESSION['masterid'] = $_GET['masterid'];
@@ -52,13 +52,13 @@ if ( isset($_GET['mstact']) ) {
 					$result1 = '';
 					$sql1 = "select * from rstudent where rstudent_id = '" . $_SESSION['masterid'] . "'";
 					$result1 = mysqli_query( $link1, $sql1 );
-					$rstudent = mysqli_fetch_array( $result1 );		
-			  
-			
+					$rstudent = mysqli_fetch_array( $result1 );
+
+
 	      }
 		}
 		if (  $_SESSION['mstact'] == 'mstnew' ) {
-			
+
 	        $_SESSION['masterid'] = '0';
 
 					$where1 = '';
@@ -68,37 +68,37 @@ if ( isset($_GET['mstact']) ) {
 					$result1 = mysqli_query( $link1, $sql1 );
 					$rstudent = mysqli_fetch_array( $result1 );
 		}
-	
+
   }
 }
 
 //********************************************************************
 if ( isset($_POST['syori']) ) {
   if ( $_POST['syori'] == '登録' ) {
-	  
+
 	$where5 = '';
 	$sql5 = '';
 	$result5 = '';
 	$sql5 = "select * from rstudent where rst_mail = '" . $_POST['rst_mail'] . "'";
 	$result5 = mysqli_query( $link1, $sql5 );
 	$rstudent5 = mysqli_fetch_array( $result5 );
-	  
+
 	if (  $rstudent5['rstudent_id'] > '0' ) {
 		$error = 'このメールアドレスで既に登録されています。';
-		
-		
+
+
 		$where1 = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from rstudent where rstudent_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
-		$rstudent = mysqli_fetch_array( $result1 );		
-		
+		$rstudent = mysqli_fetch_array( $result1 );
+
 	} else {
-	  
+
 	  if (  $_SESSION['mstact'] == 'mstnew' ) {
-			
-		
+
+
 		$sql = "insert into rstudent (
 			rst_kanji,
 			rst_kana,
@@ -124,20 +124,20 @@ if ( isset($_POST['syori']) ) {
 			'" . mysqli_real_escape_string( $link1, $_POST['rst_clsreg'] ) . "',
 			'" . '' . "'
 		)";
-		$result = mysqli_query( $link1, $sql ) or die('query error126' . mysql_error());
+		$result = mysqli_query( $link1, $sql ) or die('query error126' . mysqli_error($link1));
 		$_SESSION['masterid'] = mysqli_insert_id( $link1 );
 		$_SESSION['mstact'] = 'mstedit';
-	
+
 		$where = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from rstudent where rstudent_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
 		$rstudent = mysqli_fetch_array( $result1 );
-		
-		
+
+
         $mstmsg = '登録しました。';
-	
+
 	  } else {
 
 		$sql = "update rstudent set
@@ -152,23 +152,23 @@ if ( isset($_POST['syori']) ) {
 					rst_qualifi = '" . mysqli_real_escape_string( $link1, $_POST['rst_qualifi'] ) . "'
 					rst_clsreg = '" . mysqli_real_escape_string( $link1, $_POST['rst_clsreg'] ) . "'
 			where rstudent_id = '" . $_SESSION['masterid'] . "'";
-		$result = mysqli_query( $link1, $sql ) or die('query error153' . mysql_error());
-		
+		$result = mysqli_query( $link1, $sql ) or die('query error153' . mysqli_error($link1));
+
 		$where1 = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from rstudent where rstudent_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
 		$rstudent = mysqli_fetch_array( $result1 );
-		
-		
+
+
         $mstmsg = '登録しました。';
-		
+
 	  }
-	  
+
     }
 
-		
+
   }
 }
 

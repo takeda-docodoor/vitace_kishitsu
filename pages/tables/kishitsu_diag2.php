@@ -27,9 +27,9 @@ $login_st = 0;    // ログイン初期化
 $error = '';
 
 //
-session_set_cookie_params( 365 * 24 * 3600 );
+// session_set_cookie_params( 365 * 24 * 3600 );
 
-session_start();
+// session_start();
 
 //if ( $_SESSION['passwd'] != '' ) {
 //  } else {
@@ -217,7 +217,7 @@ td.huntsys1 { text-align: center; }
 			$where101 .= "aky_date = '" . $aky_date . "' and ";
 			$where101 .= '1 = 1';
 			$sql101 = "select * from aurakoyomi where $where101";
-			$result101 = mysqli_query( $link1, $sql101 ) or die('query error274' . mysql_error());
+			$result101 = mysqli_query( $link1, $sql101 ) or die('query error274' . mysqli_error($link1));
 			$num_rows101 = mysqli_num_rows( $result101 );
 
 		  ?>

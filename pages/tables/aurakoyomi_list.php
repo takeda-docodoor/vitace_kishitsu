@@ -54,28 +54,28 @@ $link1 = db_connect1();
 //********************************************************************
 if ( isset($_POST['syori']) ) {
   if ( $_POST['syori'] == '検索' ) {
-	  
+
   	  if ( $_POST['aura_year'] > '0' ) {
         $_SESSION['aura_year'] = $_POST['aura_year'];
 	  }
   	  if ( $_POST['aura_month'] != '' ) {
         $_SESSION['aura_month'] = $_POST['aura_month'];
 	  }
-	  
+
   }
 }
 
 //********************************************************************
 if ( isset($_GET['action']) ) {
   if ( $_GET['action'] == 'disp' ) {
-	  
+
 	$where1 = '';
 	$sql1 = '';
 	$result1 = '';
 	$sql1 = "select * from koyomiform where koyomiform_id = '" . $_GET['koyomiform_id'] . "'";
 	$result1 = mysqli_query( $link1, $sql1 );
 	$koyomiform = mysqli_fetch_array( $result1 );
-	  
+
     $_SESSION['aura_year'] = $koyomiform['kfm_year'];
     $_SESSION['aura_month'] = '01';
   }
@@ -84,14 +84,14 @@ if ( isset($_GET['action']) ) {
 //********************************************************************
 if ( isset($_GET['action']) ) {
   if ( $_GET['action'] == 'seisei' ) {
-	  
+
 	$where1 = '';
 	$sql1 = '';
 	$result1 = '';
 	$sql1 = "select * from koyomiform where koyomiform_id = '" . $_GET['koyomiform_id'] . "'";
 	$result1 = mysqli_query( $link1, $sql1 );
 	$koyomiform = mysqli_fetch_array( $result1 );
-	  
+
 	$aura_ymdfrom = $koyomiform['kfm_year'] . '-01-01';
 	$aura_ymdto = $koyomiform['kfm_year'] . '-12-31';
 	$where10 = '';
@@ -101,29 +101,29 @@ if ( isset($_GET['action']) ) {
 	$where10 .= "aky_date <= '" . $aura_ymdto . "' and ";
 	$where10 .= '1 = 1';
 	$sql10 = "select * from aurakoyomi where $where10 order by aky_date";
-	$result10 = mysqli_query( $link1, $sql10 ) or die('query error88' . mysql_error());
+	$result10 = mysqli_query( $link1, $sql10 ) or die('query error88' . mysqli_error($link1));
 	while ( $aurakoyomi10 = mysqli_fetch_array( $result10 ) ) {
 		$sql = "delete from aurakoyomi where aurakoyomi_id = '" . $aurakoyomi10['aurakoyomi_id'] . "'";
 		$result = mysqli_query( $link1, $sql );
 	}
-	 
+
 	$koyomi_base = '1900-01-01';
-	
+
 	$koyomi_start = $koyomiform['kfm_year'] . '-01-01';
 	$start_time = $koyomiform['kfm_year'] . '-01-01 00:00:00';
 	$koyomi_end = $koyomiform['kfm_year'] . '-12-31';
 	$cal_a = ($koyomiform['kfm_year'] - 1900) % 10;
 	$year_aura10 = ($cal_a + 6) % 10;
 	if ( $year_aura10 == 0 ) {$year_aura10 = 10;}
-	  
+
 	$cal_b = ($koyomiform['kfm_year'] - 1900) % 12;
 	$year_aura12 = ($cal_b + 12) % 12;
 	if ( $year_aura12 == 0 ) {$year_aura12 = 12;}
-	  
+
 	$cal_c = ($koyomiform['kfm_year'] - 1900) * 2;
 	$month_aura10 = ($cal_c + 3) % 10;
 	$month_aura12 = 1;
-	  
+
 	$timestamp1 = strtotime($koyomi_base);
     $timestamp2 = strtotime($koyomi_start);
     $seconddiff = abs($timestamp2 - $timestamp1);
@@ -133,7 +133,7 @@ if ( isset($_GET['action']) ) {
 	$cal_e = $daydiff % 12;
 	$day_aura12 = ($cal_e + 11) % 12;
 	if ( $day_aura12 == 0 ) {$day_aura12 = 12;}
-	  
+
 	$aky_date = $koyomi_start;
 	$aky_time = $start_time;
     $aky_year10 = $year_aura10;
@@ -145,10 +145,10 @@ if ( isset($_GET['action']) ) {
     $aky_day10 = $day_aura10;
     $aky_day12 = $day_aura12;
 	$aky_dayconv = $aurachg_tbl[$day_aura12];
-	  
+
 	$n = 0; while ( $aky_date <= $koyomi_end ) {
 	//$n = 0; while ( $n <= 40 ) {
-		
+
 	  if ( $aky_date == $koyomiform['kfm_chgyear'] ) {
          $aky_year10 = $aky_year10 + 1;
 		 if ( $aky_year10 > 10 ) {$aky_year10 = $aky_year10 - 10;}
@@ -264,7 +264,7 @@ if ( isset($_GET['action']) ) {
 	  if ( $aky_date == $koyomiform['kfm_convdec'] ) {
 	     $aky_monthconv = $aurachg_tbl[$aky_month12];
 	  }
-		
+
 		$sql = "insert into aurakoyomi (
 			aky_date,
 			aky_year10,
@@ -292,22 +292,22 @@ if ( isset($_GET['action']) ) {
 			'" . '' . "',
 			'" . '0' . "'
 		)";
-		$result = mysqli_query( $link1, $sql ) or die('query error164' . mysql_error());
-		
+		$result = mysqli_query( $link1, $sql ) or die('query error164' . mysqli_error($link1));
+
 		$aky_date = date('Y-m-d', strtotime('+1 day', strtotime($aky_time)));
 		$aky_time = date('Y-m-d H:i:s', strtotime('+1 day', strtotime($aky_time)));
-		
+
         $aky_day10 = $aky_day10 + 1;
 		if ( $aky_day10 > 10 ) {$aky_day10 = $aky_day10 - 10;}
         $aky_day12 = $aky_day12 + 1;
 		if ( $aky_day12 > 12 ) {$aky_day12 = $aky_day12 - 12;}
 		$aky_dayconv = $aurachg_tbl[$aky_day12];
-		
+
 	$n ++; }
-	  
+
     $_SESSION['aura_year'] = $koyomiform['kfm_year'];
     $_SESSION['aura_month'] = '01';
-	  
+
   }
 }
 
@@ -315,10 +315,10 @@ if ( isset($_GET['action']) ) {
 //********************************************************************
 if ( isset($_GET['action']) ) {
   if ( $_GET['action'] == 'attendancedel' ) {
-	  
+
 	$sql = "delete from attendance where attendance_id = '" . $_GET['attendance_id'] . "'";
 	$result = mysqli_query( $link1, $sql );
-	  
+
   }
 }
 
@@ -356,9 +356,9 @@ if ( isset($_GET['action']) ) {
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        
-        
-        
+
+
+
 <script language="JavaScript" type="text/javascript">
 function navi_win( Masterid ) {
         self.window.name="main"
@@ -517,7 +517,7 @@ td.huntsys1 { text-align: center; }
                 </tr>
                 </thead>
                 <tbody>
-                
+
 			  <?php
 				$aura_ymdfrom = $_SESSION['aura_year'] . '-' . $_SESSION['aura_month'] . '-01';
 				$aura_ymdto = $_SESSION['aura_year'] . '-' . $_SESSION['aura_month'] . '-' . date('t', strtotime($aura_ymdfrom));
@@ -528,8 +528,8 @@ td.huntsys1 { text-align: center; }
 				$where101 .= "aky_date <= '" . $aura_ymdto . "' and ";
 				$where101 .= '1 = 1';
 				$sql101 = "select * from aurakoyomi where $where101 order by aky_date";
-				$result101 = mysqli_query( $link1, $sql101 ) or die('query error274' . mysql_error());
-		        
+				$result101 = mysqli_query( $link1, $sql101 ) or die('query error274' . mysqli_error($link1));
+
 			  ?>
 			  <?php $m = 0; while ( $aurakoyomi = mysqli_fetch_array( $result101 ) ) { ?>
 				<tr>
@@ -548,8 +548,8 @@ td.huntsys1 { text-align: center; }
                 </tbody>
               </table>
             </div>
-            
-            
+
+
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
@@ -559,7 +559,7 @@ td.huntsys1 { text-align: center; }
         <!-- /.col -->
       </div>
       <!-- /.row -->
-      
+
     </section>
     <!-- /.content -->
   </div>

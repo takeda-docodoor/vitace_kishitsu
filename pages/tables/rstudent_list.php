@@ -44,20 +44,20 @@ $link1 = db_connect1();
 //********************************************************************
 if ( isset($_GET['action']) ) {
   if ( $_GET['action'] == 'rstudentdel' ) {
-	  
+
 	$sql = "delete from rstudent where rstudent_id = '" . $_GET['rstudent_id'] . "'";
 	$result = mysqli_query( $link1, $sql );
-	  
+
   }
 }
 
 //********************************************************************
 if ( isset($_GET['action']) ) {
   if ( $_GET['action'] == 'rstclassdel' ) {
-    
+
   $sql = "delete from rstclass where rstclass_id = '" . $_GET['rstclass_id'] . "'";
   $result = mysqli_query( $link1, $sql );
-    
+
   }
 }
 
@@ -97,9 +97,9 @@ if ( isset($_GET['action']) ) {
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        
-        
-        
+
+
+
 <script language="JavaScript" type="text/javascript">
 function navi_win2( Masterid ) {
         self.window.name="main"
@@ -209,7 +209,7 @@ td.huntsys1 { text-align: center; }
                   <th class="huntsys1" colspan="2">選択</th>
                 </tr>
                 </thead>
-                
+
         			  <?php
         				$where101 = '';
         				$sql101 = '';
@@ -217,8 +217,8 @@ td.huntsys1 { text-align: center; }
         				$where101 .= "rstudent_id > '" . '0' . "' and ";
         				$where101 .= '1 = 1';
         				$sql101 = "select * from rstudent where $where101 order by rstudent_id";
-        				$result101 = mysqli_query( $link1, $sql101 ) or die('query error201' . mysql_error());
-        		        
+        				$result101 = mysqli_query( $link1, $sql101 ) or die('query error201' . mysqli_error($link1));
+
         			  ?>
         			  <?php $m = 0; while ( $rstudent = mysqli_fetch_array( $result101 ) ) { ?>
                   <tbody>
@@ -241,7 +241,7 @@ td.huntsys1 { text-align: center; }
                   $where111 .= "rsc_rstudentid = '" . $rstudent['rstudent_id'] . "' and ";
                   $where111 .= '1 = 1';
                   $sql111 = "select * from rstclass where $where111 order by rsc_clsfrom DESC";
-                  $result111 = mysqli_query( $link1, $sql111 ) or die('query error213' . mysql_error());
+                  $result111 = mysqli_query( $link1, $sql111 ) or die('query error213' . mysqli_error($link1));
                   ?>
                   <?php $k = 0; while ( $rstclass = mysqli_fetch_array( $result111 ) ) { ?>
                     <tbody>
@@ -258,7 +258,7 @@ td.huntsys1 { text-align: center; }
                     </tbody>
                   <?php $k ++; } ?>
                 <?php $m ++; } ?>
-               
+
               </table>
             </div>
             <!-- /.box-body -->

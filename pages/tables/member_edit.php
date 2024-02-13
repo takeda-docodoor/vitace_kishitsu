@@ -40,24 +40,24 @@ $mstmsg = '';
 if ( isset($_GET['mstact']) ) {
   if ( $_GET['mstact'] != '' ) {
     $_SESSION['mstact'] = $_GET['mstact'];
-	
+
 	if (  $_SESSION['mstact'] == 'mstedit' ) {
   	  if ( $_GET['masterid'] != '' ) {
         $_SESSION['masterid'] = $_GET['masterid'];
-		
+
 
 		$where1 = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from member where member_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
-		$member = mysqli_fetch_array( $result1 );		
-		  
-		
+		$member = mysqli_fetch_array( $result1 );
+
+
       }
 	}
 	if (  $_SESSION['mstact'] == 'mstnew' ) {
-		
+
   	  if ( $_GET['masterid'] != '' ) {
         $_SESSION['masterid'] = '0';
 
@@ -69,37 +69,37 @@ if ( isset($_GET['mstact']) ) {
 		$member = mysqli_fetch_array( $result1 );
 	  }
 	}
-	
+
   }
 }
 
 //********************************************************************
 if ( isset($_POST['syori']) ) {
   if ( $_POST['syori'] == '登録' ) {
-	  
+
 	$where5 = '';
 	$sql5 = '';
 	$result5 = '';
 	$sql5 = "select * from member where mbr_loginid = '" . $_POST['mbr_loginid'] . "'";
 	$result5 = mysqli_query( $link1, $sql5 );
 	$member5 = mysqli_fetch_array( $result5 );
-	  
+
 	if (  $member5['member_id'] > '0' ) {
 		$error = 'IDが他の人と重複してます。';
-		
-		
+
+
 		$where1 = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from member where member_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
-		$member = mysqli_fetch_array( $result1 );		
-		
+		$member = mysqli_fetch_array( $result1 );
+
 	} else {
-	  
+
 	  if (  $_SESSION['mstact'] == 'mstnew' ) {
-			
-		
+
+
 		$sql = "insert into member (
 			mbr_kanji,
 			mbr_kana,
@@ -133,20 +133,20 @@ if ( isset($_POST['syori']) ) {
 			'" . mysqli_real_escape_string( $link1, $_POST['mbr_kieventid'] ) . "',
 			'" . '' . "'
 		)";
-		$result = mysqli_query( $link1, $sql ) or die('query error135' . mysql_error());
+		$result = mysqli_query( $link1, $sql ) or die('query error135' . mysqli_error($link1));
 		$_SESSION['masterid'] = mysqli_insert_id( $link1 );
 		$_SESSION['mstact'] = 'mstedit';
-	
+
 		$where = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from member where member_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
 		$member = mysqli_fetch_array( $result1 );
-		
-		
+
+
         $mstmsg = '登録しました。';
-	
+
 	  } else {
 
 		$sql = "update member set
@@ -165,23 +165,23 @@ if ( isset($_POST['syori']) ) {
 					mbr_kishitsu = '" . mysqli_real_escape_string( $link1, $_POST['mbr_kishitsu'] ) . "',
 					mbr_kieventid = '" . mysqli_real_escape_string( $link1, $_POST['mbr_kieventid'] ) . "'
 			where member_id = '" . $_SESSION['masterid'] . "'";
-		$result = mysqli_query( $link1, $sql ) or die('query error167' . mysql_error());
-		
+		$result = mysqli_query( $link1, $sql ) or die('query error167' . mysqli_error($link1));
+
 		$where1 = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from member where member_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
 		$member = mysqli_fetch_array( $result1 );
-		
-		
+
+
         $mstmsg = '登録しました。';
-		
+
 	  }
-	  
+
     }
 
-		
+
   }
 }
 
@@ -196,7 +196,7 @@ $where51 .= "member_id > '" . '0' . "' and ";
 $where51 .= "mbr_type = '" . '1' . "' and ";
 $where51 .= '1 = 1';
 $sql51 = "select * from member where $where51 order by member_id";
-$result51 = mysqli_query( $link1, $sql51 ) or die('query error200' . mysql_error());
+$result51 = mysqli_query( $link1, $sql51 ) or die('query error200' . mysqli_error($link1));
 
 
 $n = 0; while ( $member51 = mysqli_fetch_array( $result51 ) ) {
@@ -215,7 +215,7 @@ $kievent_tbl[] = '';
 $where61 .= "kievent_id > '" . '0' . "' and ";
 $where61 .= '1 = 1';
 $sql61 = "select * from kievent where $where61 order by kievent_id";
-$result61 = mysqli_query( $link1, $sql61 ) or die('query error208' . mysql_error());
+$result61 = mysqli_query( $link1, $sql61 ) or die('query error208' . mysqli_error($link1));
 
 
 $n = 0; while ( $kievent = mysqli_fetch_array( $result61 ) ) {

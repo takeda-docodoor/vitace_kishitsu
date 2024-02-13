@@ -42,7 +42,7 @@ $mstmsg = '';
 if ( isset($_GET['mstact']) ) {
   if ( $_GET['mstact'] != '' ) {
     $_SESSION['mstact'] = $_GET['mstact'];
-	
+
 		if (  $_SESSION['mstact'] == 'mstedit' ) {
 	  	  if ( $_GET['masterid'] > '0' ) {
 	        $_SESSION['masterid'] = $_GET['masterid'];
@@ -52,13 +52,13 @@ if ( isset($_GET['mstact']) ) {
 					$result1 = '';
 					$sql1 = "select * from rstclass where rstclass_id = '" . $_SESSION['masterid'] . "'";
 					$result1 = mysqli_query( $link1, $sql1 );
-					$rstclass = mysqli_fetch_array( $result1 );		
-			  
-			
+					$rstclass = mysqli_fetch_array( $result1 );
+
+
 	      }
 		}
 		if (  $_SESSION['mstact'] == 'mstnew' ) {
-			
+
 	  	  if ( $_GET['masterid'] > '0' ) {
 	        $_SESSION['rstudentid'] = $_GET['masterid'];
 
@@ -70,18 +70,18 @@ if ( isset($_GET['mstact']) ) {
 					$rstclass = mysqli_fetch_array( $result1 );
 				}
 		}
-	
+
   }
 }
 
 //********************************************************************
 if ( isset($_POST['syori']) ) {
   if ( $_POST['syori'] == '登録' ) {
-	  
-	  
+
+
 	  if (  $_SESSION['mstact'] == 'mstnew' ) {
-			
-		
+
+
 		$sql = "insert into rstclass (
 			rsc_rstudentid,
 			rsc_name,
@@ -101,20 +101,20 @@ if ( isset($_POST['syori']) ) {
 			'" . mysqli_real_escape_string( $link1, $_POST['rsc_payst'] ) . "',
 			'" . '' . "'
 		)";
-		$result = mysqli_query( $link1, $sql ) or die('query error104' . mysql_error());
+		$result = mysqli_query( $link1, $sql ) or die('query error104' . mysqli_error($link1));
 		$_SESSION['masterid'] = mysqli_insert_id( $link1 );
 		$_SESSION['mstact'] = 'mstedit';
-	
+
 		$where = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from rstclass where rstclass_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
 		$rstclass = mysqli_fetch_array( $result1 );
-		
-		
+
+
         $mstmsg = '登録しました。';
-	
+
 	  } else {
 
 		$sql = "update rstclass set
@@ -125,21 +125,21 @@ if ( isset($_POST['syori']) ) {
 					rsc_pay = '" . mysqli_real_escape_string( $link1, $_POST['rsc_pay'] ) . "',
 					rsc_payst = '" . mysqli_real_escape_string( $link1, $_POST['rsc_payst'] ) . "'
 			where rstclass_id = '" . $_SESSION['masterid'] . "'";
-		$result = mysqli_query( $link1, $sql ) or die('query error128' . mysql_error());
-		
+		$result = mysqli_query( $link1, $sql ) or die('query error128' . mysqli_error($link1));
+
 		$where1 = '';
 		$sql1 = '';
 		$result1 = '';
 		$sql1 = "select * from rstclass where rstclass_id = '" . $_SESSION['masterid'] . "'";
 		$result1 = mysqli_query( $link1, $sql1 );
 		$rstclass = mysqli_fetch_array( $result1 );
-		
-		
+
+
         $mstmsg = '登録しました。';
-		
+
 	  }
 
-		
+
   }
 }
 

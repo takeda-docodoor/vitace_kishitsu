@@ -48,11 +48,11 @@ $link1 = db_connect1();
 //********************************************************************
 if ( isset($_POST['syori']) ) {
   if ( $_POST['syori'] == '検索' ) {
-	  
+
   	  if ( $_POST['mbr_companyid'] > '0' ) {
         $_SESSION['mbr_companyid'] = $_POST['mbr_companyid'];
 	  }
-	  
+
   }
 }
 
@@ -62,10 +62,10 @@ if ( isset($_POST['syori']) ) {
 //********************************************************************
 if ( isset($_GET['action']) ) {
   if ( $_GET['action'] == 'memberdel' ) {
-	  
+
 	$sql = "delete from member where member_id = '" . $_GET['member_id'] . "'";
 	$result = mysqli_query( $link1, $sql );
-	  
+
   }
 }
 
@@ -105,9 +105,9 @@ if ( isset($_GET['action']) ) {
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        
-        
-        
+
+
+
 <script language="JavaScript" type="text/javascript">
 function navi_win( Masterid ) {
         self.window.name="main"
@@ -274,7 +274,7 @@ td.huntsys1 { text-align: center; }
                 </tr>
                 </thead>
                 <tbody>
-                
+
 			  <?php
 				$where101 = '';
 				$sql101 = '';
@@ -282,8 +282,8 @@ td.huntsys1 { text-align: center; }
 				$where101 .= "member_id > '" . '0' . "' and ";
 				$where101 .= '1 = 1';
 				$sql101 = "select * from member where $where101 order by member_id";
-				$result101 = mysqli_query( $link1, $sql101 ) or die('query error201' . mysql_error());
-		        
+				$result101 = mysqli_query( $link1, $sql101 ) or die('query error201' . mysqli_error($link1));
+
 			  ?>
 			  <?php $m = 0; while ( $member = mysqli_fetch_array( $result101 ) ) { ?>
 				  <?php
@@ -319,7 +319,7 @@ td.huntsys1 { text-align: center; }
 				  <td class="huntsys1"><a href="member_list.php?member_id=<?php echo $member['member_id'] ?>&action=memberdel" alt="削除" title="データを削除します。" onClick="return confirm( 'データを削除します。よろしいですか？' )">削除</a></td>
 				</tr>
               <?php $m ++; } ?>
-               
+
                 </tbody>
               </table>
               <div class="box-footer">
