@@ -49,9 +49,6 @@ if (isset($_POST['action'])) {
     //	$result = mysqli_query( $link1, $sql ) or die('query error' . mysql_error());
     //	$skmember = mysqli_fetch_array( $result );
 
-    $passwd = '8887';//在校生用
-    $passwd_img = '3753';//上級者様
-    $passwd_mng = '9876';//管理者用
     if ($_POST['passwd'] == $passwd || $_POST['passwd'] == $passwd_mng || $_POST['passwd'] == $passwd_img) {
       $_SESSION['passwd'] = $_POST['passwd'];
       //		$_SESSION['memberid'] = $member['member_id'];
