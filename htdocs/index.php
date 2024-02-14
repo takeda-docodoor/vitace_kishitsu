@@ -49,13 +49,9 @@ if (isset($_POST['action'])) {
     //	$result = mysqli_query( $link1, $sql ) or die('query error' . mysql_error());
     //	$skmember = mysqli_fetch_array( $result );
 
-    if ($now_ymd >= '2022-02-04') {
-      $passwd = '8887';
-    } else {
-      $passwd = '6955';
-    }
-    $passwd_mng = '9876';
-    $passwd_img = '3753';
+    $passwd = '8887';//在校生用
+    $passwd_img = '3753';//上級者様
+    $passwd_mng = '9876';//管理者用
     if ($_POST['passwd'] == $passwd || $_POST['passwd'] == $passwd_mng || $_POST['passwd'] == $passwd_img) {
       $_SESSION['passwd'] = $_POST['passwd'];
       //		$_SESSION['memberid'] = $member['member_id'];
@@ -77,9 +73,19 @@ if (isset($_POST['action'])) {
         exit;
       } else {
         if ($_SESSION['mbr_dpt'] == '0') {
-          $_SESSION['home_url'] = $csctm_url;
-          header('Location: ' . $csctm_url); //
-          exit;
+          if ($_SESSION['passwd'] == $passwd) {
+            $_SESSION['home_url'] = $csctm_url;
+            header('Location: ' . $csctm_url); //
+            exit;
+          } elseif ($_SESSION['passwd'] == $passwd_img) {
+            $_SESSION['home_url'] = $csctm_url_img;
+            header('Location: ' . $csctm_url_img); //
+            exit;
+          } elseif ($_SESSION['passwd'] == $passwd_mng) {
+            $_SESSION['home_url'] = $csctm_url_mng;
+            header('Location: ' . $csctm_url_mng); //
+            exit;
+          }
         }
       }
     }
