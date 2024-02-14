@@ -31,10 +31,14 @@ session_set_cookie_params( 365 * 24 * 3600 );
 session_start();
 
 if ( $_SESSION['passwd'] != '' ) {
-  } else {
-        header('Location: ../../index.php');
-        exit;
+  if($_SESSION['passwd'] != $passwd_img) {
+    header('Location: ../../index.php');
+    exit;
   }
+} else {
+  header('Location: ../../index.php');
+  exit;
+}
 
 
 // db connect
