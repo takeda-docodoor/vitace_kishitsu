@@ -171,28 +171,6 @@ td.huntsys1 { text-align: center; }
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-institution"></i> <span>受講生情報</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="#"><i class="fa fa-circle-o"></i>受講生一覧</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i> <span>顧客情報</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="#"><i class="fa fa-circle-o"></i>顧客一覧</a></li>
-          </ul>
-        </li>
         <li class="treeview active">
           <a href="#">
             <i class="fa fa-inbox"></i> <span>鑑定暦データ生成</span>
@@ -202,17 +180,6 @@ td.huntsys1 { text-align: center; }
           </a>
           <ul class="treeview-menu">
             <li><a href="koyomiform_list.php"><i class="fa fa-circle-o"></i>鑑定暦データ生成</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-inbox"></i> <span>氣質診断</span>
-            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="kishitsu_diag.html"><i class="fa fa-circle-o"></i>氣質診断結果</a></li>
           </ul>
         </li>
       </ul>
