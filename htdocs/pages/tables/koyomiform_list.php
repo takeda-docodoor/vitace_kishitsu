@@ -63,8 +63,30 @@ if ( isset($_GET['action']) ) {
 
   if ( $_GET['action'] == 'koyomiformdel' ) {
 
-	$sql = "delete from koyomiform where koyomiform_id = '" . $_GET['koyomiform_id'] . "'";
-	$result = mysqli_query( $link1, $sql );
+    $where1 = '';
+    $sql1 = '';
+    $result1 = '';
+    $sql1 = "select * from koyomiform where koyomiform_id = '" . $_GET['koyomiform_id'] . "'";
+    $result1 = mysqli_query( $link1, $sql1 );
+    $koyomiform = mysqli_fetch_array( $result1 );
+
+    $aura_ymdfrom = $koyomiform['kfm_year'] . '-01-01';
+    $aura_ymdto = $koyomiform['kfm_year'] . '-12-31';
+    $where10 = '';
+    $sql10 = '';
+    $result10 = '';
+    $where10 .= "aky_date >= '" . $aura_ymdfrom . "' and ";
+    $where10 .= "aky_date <= '" . $aura_ymdto . "' and ";
+    $where10 .= '1 = 1';
+    $sql10 = "select * from aurakoyomi where $where10 order by aky_date";
+    $result10 = mysqli_query( $link1, $sql10 ) or die('query error88' . mysqli_error($link1));
+    while ( $aurakoyomi10 = mysqli_fetch_array( $result10 ) ) {
+      $sql = "delete from aurakoyomi where aurakoyomi_id = '" . $aurakoyomi10['aurakoyomi_id'] . "'";
+      $result = mysqli_query( $link1, $sql );
+    }
+
+    $sql = "delete from koyomiform where koyomiform_id = '" . $_GET['koyomiform_id'] . "'";
+    $result = mysqli_query( $link1, $sql );
 
   }
 }
