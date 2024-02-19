@@ -41,187 +41,228 @@ if ( isset($_GET['mstact']) ) {
   if ( $_GET['mstact'] != '' ) {
     $_SESSION['mstact'] = $_GET['mstact'];
 
-	if (  $_SESSION['mstact'] == 'mstedit' ) {
-  	  if ( $_GET['masterid'] != '' ) {
+    if (  $_SESSION['mstact'] == 'mstedit' ) {
+      if ( $_GET['masterid'] != '' ) {
         $_SESSION['masterid'] = $_GET['masterid'];
 
-
-		$where1 = '';
-		$sql1 = '';
-		$result1 = '';
-		$sql1 = "select * from koyomiform where koyomiform_id = '" . $_SESSION['masterid'] . "'";
-		$result1 = mysqli_query( $link1, $sql1 );
-		$koyomiform = mysqli_fetch_array( $result1 );
+        $where1 = '';
+        $sql1 = '';
+        $result1 = '';
+        $sql1 = "select * from koyomiform where koyomiform_id = '" . $_SESSION['masterid'] . "'";
+        $result1 = mysqli_query( $link1, $sql1 );
+        $koyomiform = mysqli_fetch_array( $result1 );
 
       }
-	}
-	if (  $_SESSION['mstact'] == 'mstnew' ) {
+    }
 
-  	  if ( $_GET['masterid'] != '' ) {
+    if (  $_SESSION['mstact'] == 'mstnew' ) {
+
+      if ( $_GET['masterid'] != '' ) {
         $_SESSION['masterid'] = '0';
 
-		$where1 = '';
-		$sql1 = '';
-		$result1 = '';
-		$sql1 = "select * from koyomiform where koyomiform_id = '" . '0' . "'";
-		$result1 = mysqli_query( $link1, $sql1 );
-		$koyomiform = mysqli_fetch_array( $result1 );
-	  }
-	}
+        $where1 = '';
+        $sql1 = '';
+        $result1 = '';
+        $sql1 = "select * from koyomiform where koyomiform_id = '" . '0' . "'";
+        $result1 = mysqli_query( $link1, $sql1 );
+        $koyomiform = mysqli_fetch_array( $result1 );
+      }
+    }
+  }
+}
 
+function getDateString($year, $month, $day) {
+  if ($day) {
+      return "$year-$month-$day";
+  } else {
+      return "$year-$month-01"; // デフォルト値を1日に設定
   }
 }
 
 //********************************************************************
 if ( isset($_POST['syori']) ) {
+
   if ( $_POST['syori'] == '登録' ) {
 
-	$kfm_chgyear = $_POST['kfm_year'] . '-' . $_POST['chgyear_month'] . '-' . $_POST['chgyear_day'];
+    $kfm_year  = $_POST['kfm_year'];
+    if ($_POST['chgyear_month'] && $_POST['chgyear_day']) {
+        $kfm_chgyear = $_POST['kfm_year'] . '-' . $_POST['chgyear_month'] . '-' . $_POST['chgyear_day'];
+    } else {
+        $kfm_chgyear = $_POST['kfm_year'] . '-01-01';
+    }
 
-	$kfm_chgjan = $_POST['kfm_year'] . '-01-' . $_POST['chgjan_day'];
-	$kfm_convjan = $_POST['kfm_year'] . '-01-' . $_POST['convjan_day'];
-	$kfm_chgfeb = $_POST['kfm_year'] . '-02-' . $_POST['chgfeb_day'];
-	$kfm_convfeb = $_POST['kfm_year'] . '-02-' . $_POST['convfeb_day'];
-	$kfm_chgmar = $_POST['kfm_year'] . '-03-' . $_POST['chgmar_day'];
-	$kfm_convmar = $_POST['kfm_year'] . '-03-' . $_POST['convmar_day'];
-	$kfm_chgapr = $_POST['kfm_year'] . '-04-' . $_POST['chgapr_day'];
-	$kfm_convapr = $_POST['kfm_year'] . '-04-' . $_POST['convapr_day'];
-	$kfm_chgmay = $_POST['kfm_year'] . '-05-' . $_POST['chgmay_day'];
-	$kfm_convmay = $_POST['kfm_year'] . '-05-' . $_POST['convmay_day'];
-	$kfm_chgjun = $_POST['kfm_year'] . '-06-' . $_POST['chgjun_day'];
-	$kfm_convjun = $_POST['kfm_year'] . '-06-' . $_POST['convjun_day'];
-	$kfm_chgjul = $_POST['kfm_year'] . '-07-' . $_POST['chgjul_day'];
-	$kfm_convjul = $_POST['kfm_year'] . '-07-' . $_POST['convjul_day'];
-	$kfm_chgaug = $_POST['kfm_year'] . '-08-' . $_POST['chgaug_day'];
-	$kfm_convaug = $_POST['kfm_year'] . '-08-' . $_POST['convaug_day'];
-	$kfm_chgsep = $_POST['kfm_year'] . '-09-' . $_POST['chgsep_day'];
-	$kfm_convsep = $_POST['kfm_year'] . '-09-' . $_POST['convsep_day'];
-	$kfm_chgoct = $_POST['kfm_year'] . '-10-' . $_POST['chgoct_day'];
-	$kfm_convoct = $_POST['kfm_year'] . '-10-' . $_POST['convoct_day'];
-	$kfm_chgnov = $_POST['kfm_year'] . '-11-' . $_POST['chgnov_day'];
-	$kfm_convnov = $_POST['kfm_year'] . '-11-' . $_POST['convnov_day'];
-	$kfm_chgdec = $_POST['kfm_year'] . '-12-' . $_POST['chgdec_day'];
-	$kfm_convdec = $_POST['kfm_year'] . '-12-' . $_POST['convdec_day'];
+    // 1月
+    $kfm_chgjan = getDateString($_POST['kfm_year'], '01', $_POST['chgjan_day']);
+    $kfm_convjan = getDateString($_POST['kfm_year'], '01', $_POST['convjan_day']);
 
-	if (  $_SESSION['mstact'] == 'mstnew' ) {
+    // 2月
+    $kfm_chgfeb = getDateString($_POST['kfm_year'], '02', $_POST['chgfeb_day']);
+    $kfm_convfeb = getDateString($_POST['kfm_year'], '02', $_POST['convfeb_day']);
 
+    // 3月
+    $kfm_chgmar = getDateString($_POST['kfm_year'], '03', $_POST['chgmar_day']);
+    $kfm_convmar = getDateString($_POST['kfm_year'], '03', $_POST['convmar_day']);
 
-		$sql = "insert into koyomiform (
-			kfm_year,
-			kfm_chgyear,
-			kfm_chgjan,
-			kfm_convjan,
-			kfm_chgfeb,
-			kfm_convfeb,
-			kfm_chgmar,
-			kfm_convmar,
-			kfm_chgapr,
-			kfm_convapr,
-			kfm_chgmay,
-			kfm_convmay,
-			kfm_chgjun,
-			kfm_convjun,
-			kfm_chgjul,
-			kfm_convjul,
-			kfm_chgaug,
-			kfm_convaug,
-			kfm_chgsep,
-			kfm_convsep,
-			kfm_chgoct,
-			kfm_convoct,
-			kfm_chgnov,
-			kfm_convnov,
-			kfm_chgdec,
-			kfm_convdec,
-			kfm_notes,
-			kfm_status
-		) values (
-			'" . mysqli_real_escape_string( $link1, $_POST['kfm_year']  ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgyear ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgjan ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convjan ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgfeb ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convfeb ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgmar ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convmar ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgapr ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convapr ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgmay ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convmay ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgjun ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convjun ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgjul ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convjul ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgaug ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convaug ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgsep ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convsep ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgoct ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convoct ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgnov ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convnov ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_chgdec ) . "',
-			'" . mysqli_real_escape_string( $link1, $kfm_convdec ) . "',
-			'" . '' . "',
-			'" . '0' . "'
-		)";
-		$result = mysqli_query( $link1, $sql ) or die('query error164' . mysqli_error($link1));
-		$_SESSION['masterid'] = mysqli_insert_id( $link1 );
-		$_SESSION['mstact'] = 'mstedit';
+    // 4月
+    $kfm_chgapr = getDateString($_POST['kfm_year'], '04', $_POST['chgapr_day']);
+    $kfm_convapr = getDateString($_POST['kfm_year'], '04', $_POST['convapr_day']);
 
-		$where = '';
-		$sql1 = '';
-		$result1 = '';
-		$sql1 = "select * from koyomiform where koyomiform_id = '" . $_SESSION['masterid'] . "'";
-		$result1 = mysqli_query( $link1, $sql1 );
-		$koyomiform = mysqli_fetch_array( $result1 );
+    // 5月
+    $kfm_chgmay = getDateString($_POST['kfm_year'], '05', $_POST['chgmay_day']);
+    $kfm_convmay = getDateString($_POST['kfm_year'], '05', $_POST['convmay_day']);
+
+    // 6月
+    $kfm_chgjun = getDateString($_POST['kfm_year'], '06', $_POST['chgjun_day']);
+    $kfm_convjun = getDateString($_POST['kfm_year'], '06', $_POST['convjun_day']);
+
+    // 7月
+    $kfm_chgjul = getDateString($_POST['kfm_year'], '07', $_POST['chgjul_day']);
+    $kfm_convjul = getDateString($_POST['kfm_year'], '07', $_POST['convjul_day']);
+
+    // 8月
+    $kfm_chgaug = getDateString($_POST['kfm_year'], '08', $_POST['chgaug_day']);
+    $kfm_convaug = getDateString($_POST['kfm_year'], '08', $_POST['convaug_day']);
+
+    // 9月
+    $kfm_chgsep = getDateString($_POST['kfm_year'], '09', $_POST['chgsep_day']);
+    $kfm_convsep = getDateString($_POST['kfm_year'], '09', $_POST['convsep_day']);
+
+    // 10月
+    $kfm_chgoct = getDateString($_POST['kfm_year'], '10', $_POST['chgoct_day']);
+    $kfm_convoct = getDateString($_POST['kfm_year'], '10', $_POST['convoct_day']);
+
+    // 11月
+    $kfm_chgnov = getDateString($_POST['kfm_year'], '11', $_POST['chgnov_day']);
+    $kfm_convnov = getDateString($_POST['kfm_year'], '11', $_POST['convnov_day']);
+
+    // 12月
+    $kfm_chgdec = getDateString($_POST['kfm_year'], '12', $_POST['chgdec_day']);
+    $kfm_convdec = getDateString($_POST['kfm_year'], '12', $_POST['convdec_day']);
+
+    if (  $_SESSION['mstact'] == 'mstnew' ) {
 
 
+      $sql = "insert into koyomiform (
+        kfm_year,
+        kfm_chgyear,
+        kfm_chgjan,
+        kfm_convjan,
+        kfm_chgfeb,
+        kfm_convfeb,
+        kfm_chgmar,
+        kfm_convmar,
+        kfm_chgapr,
+        kfm_convapr,
+        kfm_chgmay,
+        kfm_convmay,
+        kfm_chgjun,
+        kfm_convjun,
+        kfm_chgjul,
+        kfm_convjul,
+        kfm_chgaug,
+        kfm_convaug,
+        kfm_chgsep,
+        kfm_convsep,
+        kfm_chgoct,
+        kfm_convoct,
+        kfm_chgnov,
+        kfm_convnov,
+        kfm_chgdec,
+        kfm_convdec,
+        kfm_notes,
+        kfm_status
+      ) values (
+        '" . mysqli_real_escape_string( $link1, $kfm_year  ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgyear ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgjan ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convjan ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgfeb ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convfeb ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgmar ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convmar ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgapr ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convapr ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgmay ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convmay ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgjun ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convjun ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgjul ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convjul ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgaug ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convaug ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgsep ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convsep ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgoct ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convoct ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgnov ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convnov ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_chgdec ) . "',
+        '" . mysqli_real_escape_string( $link1, $kfm_convdec ) . "',
+        '" . '' . "',
+        '" . '0' . "'
+      )";
+      $result = mysqli_query( $link1, $sql );
 
-	} else {
+      if (!$result) {
+        $errorMessage = mysqli_error($link1);
+        die('query error164' . $errorMessage);
+      } else {
 
-		$sql = "update koyomiform set
-					kfm_year = '" . mysqli_real_escape_string( $link1, $_POST['kfm_yaer'] ) . "',
-					kfm_chgyear = '" . mysqli_real_escape_string( $link1, $kfm_chgyear ) . "',
-					kfm_chgjan = '" . mysqli_real_escape_string( $link1, $kfm_chgjan ) . "',
-					kfm_convjan = '" . mysqli_real_escape_string( $link1, $kfm_convjan ) . "',
-					kfm_chgfeb = '" . mysqli_real_escape_string( $link1, $kfm_chgfeb ) . "',
-					kfm_convfeb = '" . mysqli_real_escape_string( $link1, $kfm_convfeb ) . "',
-					kfm_chgmar = '" . mysqli_real_escape_string( $link1, $kfm_chgmar ) . "',
-					kfm_convmar = '" . mysqli_real_escape_string( $link1, $kfm_convmar ) . "',
-					kfm_chgapr = '" . mysqli_real_escape_string( $link1, $kfm_chgapr ) . "',
-					kfm_convapr = '" . mysqli_real_escape_string( $link1, $kfm_convapr ) . "',
-					kfm_chgmay = '" . mysqli_real_escape_string( $link1, $kfm_chgmay ) . "',
-					kfm_convmay = '" . mysqli_real_escape_string( $link1, $kfm_convmay ) . "',
-					kfm_chgjun = '" . mysqli_real_escape_string( $link1, $kfm_chgjun ) . "',
-					kfm_convjun = '" . mysqli_real_escape_string( $link1, $kfm_convjun ) . "',
-					kfm_chgjul = '" . mysqli_real_escape_string( $link1, $kfm_chgjul ) . "',
-					kfm_convjul = '" . mysqli_real_escape_string( $link1, $kfm_convjul ) . "',
-					kfm_chgaug = '" . mysqli_real_escape_string( $link1, $kfm_chgaug ) . "',
-					kfm_convaug = '" . mysqli_real_escape_string( $link1, $kfm_convaug ) . "',
-					kfm_chgsep = '" . mysqli_real_escape_string( $link1, $kfm_chgsep ) . "',
-					kfm_convsep = '" . mysqli_real_escape_string( $link1, $kfm_convsep ) . "',
-					kfm_chgoct = '" . mysqli_real_escape_string( $link1, $kfm_chgoct ) . "',
-					kfm_convoct = '" . mysqli_real_escape_string( $link1, $kfm_convoct ) . "',
-					kfm_chgnov = '" . mysqli_real_escape_string( $link1, $kfm_chgnov ) . "',
-					kfm_convnov = '" . mysqli_real_escape_string( $link1, $kfm_convnov ) . "',
-					kfm_chgdec = '" . mysqli_real_escape_string( $link1, $kfm_chgdec ) . "',
-					kfm_convdec = '" . mysqli_real_escape_string( $link1, $kfm_convdec ) . "'
-			where koyomiform_id = '" . $_SESSION['masterid'] . "'";
-		$result = mysqli_query( $link1, $sql ) or die('query error206' . mysqli_error($link1));
+        $_SESSION['masterid'] = mysqli_insert_id( $link1 );
+        $_SESSION['mstact'] = 'mstedit';
 
-		$where1 = '';
-		$sql1 = '';
-		$result1 = '';
-		$sql1 = "select * from koyomiform where koyomiform_id = '" . $_SESSION['masterid'] . "'";
-		$result1 = mysqli_query( $link1, $sql1 );
-		$koyomiform = mysqli_fetch_array( $result1 );
+        $where = '';
+        $sql1 = '';
+        $result1 = '';
+        $sql1 = "select * from koyomiform where koyomiform_id = '" . $_SESSION['masterid'] . "'";
+        $result1 = mysqli_query( $link1, $sql1 );
+        $koyomiform = mysqli_fetch_array( $result1 );
+
+      }
 
 
 
-	}
+    } else {
 
-	$mstmsg = '登録しました。';
+      $sql = "update koyomiform set
+            kfm_year = '" . mysqli_real_escape_string( $link1, $kfm_year ) . "',
+            kfm_chgyear = '" . mysqli_real_escape_string( $link1, $kfm_chgyear ) . "',
+            kfm_chgjan = '" . mysqli_real_escape_string( $link1, $kfm_chgjan ) . "',
+            kfm_convjan = '" . mysqli_real_escape_string( $link1, $kfm_convjan ) . "',
+            kfm_chgfeb = '" . mysqli_real_escape_string( $link1, $kfm_chgfeb ) . "',
+            kfm_convfeb = '" . mysqli_real_escape_string( $link1, $kfm_convfeb ) . "',
+            kfm_chgmar = '" . mysqli_real_escape_string( $link1, $kfm_chgmar ) . "',
+            kfm_convmar = '" . mysqli_real_escape_string( $link1, $kfm_convmar ) . "',
+            kfm_chgapr = '" . mysqli_real_escape_string( $link1, $kfm_chgapr ) . "',
+            kfm_convapr = '" . mysqli_real_escape_string( $link1, $kfm_convapr ) . "',
+            kfm_chgmay = '" . mysqli_real_escape_string( $link1, $kfm_chgmay ) . "',
+            kfm_convmay = '" . mysqli_real_escape_string( $link1, $kfm_convmay ) . "',
+            kfm_chgjun = '" . mysqli_real_escape_string( $link1, $kfm_chgjun ) . "',
+            kfm_convjun = '" . mysqli_real_escape_string( $link1, $kfm_convjun ) . "',
+            kfm_chgjul = '" . mysqli_real_escape_string( $link1, $kfm_chgjul ) . "',
+            kfm_convjul = '" . mysqli_real_escape_string( $link1, $kfm_convjul ) . "',
+            kfm_chgaug = '" . mysqli_real_escape_string( $link1, $kfm_chgaug ) . "',
+            kfm_convaug = '" . mysqli_real_escape_string( $link1, $kfm_convaug ) . "',
+            kfm_chgsep = '" . mysqli_real_escape_string( $link1, $kfm_chgsep ) . "',
+            kfm_convsep = '" . mysqli_real_escape_string( $link1, $kfm_convsep ) . "',
+            kfm_chgoct = '" . mysqli_real_escape_string( $link1, $kfm_chgoct ) . "',
+            kfm_convoct = '" . mysqli_real_escape_string( $link1, $kfm_convoct ) . "',
+            kfm_chgnov = '" . mysqli_real_escape_string( $link1, $kfm_chgnov ) . "',
+            kfm_convnov = '" . mysqli_real_escape_string( $link1, $kfm_convnov ) . "',
+            kfm_chgdec = '" . mysqli_real_escape_string( $link1, $kfm_chgdec ) . "',
+            kfm_convdec = '" . mysqli_real_escape_string( $link1, $kfm_convdec ) . "'
+        where koyomiform_id = '" . $_SESSION['masterid'] . "'";
+      $result = mysqli_query( $link1, $sql ) or die('query error206' . mysqli_error($link1));
+
+      $where1 = '';
+      $sql1 = '';
+      $result1 = '';
+      $sql1 = "select * from koyomiform where koyomiform_id = '" . $_SESSION['masterid'] . "'";
+      $result1 = mysqli_query( $link1, $sql1 );
+      $koyomiform = mysqli_fetch_array( $result1 );
+    }
+
+    $mstmsg = '登録しました。';
 
   }
 }
@@ -297,7 +338,7 @@ function ctrl_wind(url) {
                 <!-- text input -->
                 <div class="form-group">
                   <label>年（西暦）</label>
-                  <input type="text" name="kfm_year" value="<?php echo $koyomiform['kfm_year']; ?>" placeholder="1900,2000, ...">年
+                  <input type="text" name="kfm_year" value="<?php echo $koyomiform['kfm_year']; ?>" placeholder="1900,2000, ..." required>年
                 </div>
                 <div class="form-group">
                   <label>月、日は２桁入力してください。</label>
