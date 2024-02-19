@@ -133,6 +133,18 @@ if (isset($_POST['syori'])) {
     .box_sample {
       width: 50%;
       background-color: #FFFFFF;
+
+      @media screen and (max-width:768px) {
+
+        width: 100%;
+      }
+    }
+
+    .box-body {
+      @media screen and (max-width:768px) {
+        overflow: scroll;
+      }
+
     }
   </style>
 
@@ -262,7 +274,7 @@ if (isset($_POST['syori'])) {
           <div class="col-xs-12">
             <div class="box_sample">
               <!-- /.box-header -->
-              <div class="box_body">
+              <div class="box-body">
                 <h3>色見本</h3>
                 <table class="table table-bordered table-hover">
                   <thead>
