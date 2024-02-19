@@ -134,8 +134,7 @@ if (isset($_POST['syori'])) {
       width: 50%;
       background-color: #FFFFFF;
 
-      @media screen and (max-width:960px) {
-
+      @media screen and (max-width:1024px) {
         width: 100%;
       }
     }
@@ -152,8 +151,9 @@ if (isset($_POST['syori'])) {
     .eto-img-wrap {
       margin-top: 20px;
       .img {
+        display: inline-block;
         max-width: 100%;
-        @media screen and (max-width:960px) {
+        @media screen and (max-width:1024px) {
           width: 100%;
         }
       }
@@ -339,7 +339,7 @@ if (isset($_POST['syori'])) {
             </div>
             <?php if ($_SESSION['passwd'] == $passwd_img || $_SESSION['passwd'] == $passwd_mng) { ?>
               <div class="eto-img-wrap">
-                <img srcset="../../dist/img/roominr_12table.png 590w" sizes="(max-width:960px) 87vw, 590px" src="../../dist/img/roominr_12table.png" alt="干支画像" class="img">
+                <img srcset="../../dist/img/roominr_12table.png 590w" sizes="(max-width:1024px) 100vw, 590px" src="../../dist/img/roominr_12table.png" alt="干支画像" class="img">
               </div>
             <?php } ?>
             <!-- /.box -->
