@@ -134,17 +134,29 @@ if (isset($_POST['syori'])) {
       width: 50%;
       background-color: #FFFFFF;
 
-      @media screen and (max-width:768px) {
+      @media screen and (max-width:960px) {
 
         width: 100%;
       }
     }
 
     .box-body {
-      @media screen and (max-width:768px) {
+
+    }
+
+    .table-wrap {
+      @media screen and (max-width:960px) {
+        max-width: 100%;
         overflow: scroll;
       }
+    }
 
+    .eto-img-wrap {
+      .img {
+        @media screen and (max-width:960px) {
+          width: 100%;
+        }
+      }
     }
   </style>
 
@@ -199,64 +211,66 @@ if (isset($_POST['syori'])) {
               <!-- /.box-header -->
               <div class="box-body">
                 <h1>氣質</h1>
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th class="huntsys1" colspan="2">年干支(year)</th>
-                      <th class="huntsys1" colspan="2">月干支(month)</th>
-                      <th class="huntsys1" colspan="2">日干支(day)</th>
-                    </tr>
-                  </thead>
-
-                  <?php
-                  $aky_date = $_SESSION['aky_year'] . '-' . $_SESSION['aky_month'] . '-' . $_SESSION['aky_day'];
-                  $where101 = '';
-                  $sql101 = '';
-                  $result101 = '';
-                  $where101 .= "aky_date = '" . $aky_date . "' and ";
-                  $where101 .= '1 = 1';
-                  $sql101 = "select * from aurakoyomi where $where101";
-                  $result101 = mysqli_query($link1, $sql101) or die('query error274' . mysqli_error($link1));
-                  $num_rows101 = mysqli_num_rows($result101);
-
-                  ?>
-                  <?php if ($num_rows101 > '0') { ?>
-                    <?php $aurakoyomi = mysqli_fetch_array($result101); ?>
-                    <tbody>
+                <div class="table-wrap">
+                  <table class="table table-bordered table-hover">
+                    <thead>
                       <tr>
-                        <td class="huntsys1"><?php echo $aura10_tbl[$aurakoyomi['aky_year10']]; ?></td>
-                        <td class="huntsys1"><?php echo $aura12_tbl[$aurakoyomi['aky_year12']]; ?></td>
-                        <td class="huntsys1"><?php echo $aura10_tbl[$aurakoyomi['aky_month10']]; ?></td>
-                        <td class="huntsys1"><?php echo $aura12_tbl[$aurakoyomi['aky_month12']]; ?></td>
-                        <td class="huntsys1"><?php echo $aura10_tbl[$aurakoyomi['aky_day10']]; ?></td>
-                        <td class="huntsys1"><?php echo $aura12_tbl[$aurakoyomi['aky_day12']]; ?></td>
+                        <th class="huntsys1" colspan="2">年干支(year)</th>
+                        <th class="huntsys1" colspan="2">月干支(month)</th>
+                        <th class="huntsys1" colspan="2">日干支(day)</th>
                       </tr>
-                    </tbody>
-                    <tbody>
-                      <tr>
-                        <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_year10']]; ?>">
-                          <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_year10']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_year10']]; ?></font>
-                        </td>
-                        <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_yearconv']]; ?>">
-                          <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_yearconv']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_yearconv']]; ?></font>
-                        </td>
-                        <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_month10']]; ?>">
-                          <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_month10']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_month10']]; ?></font>
-                        </td>
-                        <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_monthconv']]; ?>">
-                          <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_monthconv']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_monthconv']]; ?></font>
-                        </td>
-                        <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_day10']]; ?>">
-                          <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_day10']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_day10']]; ?></font>
-                        </td>
-                        <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_dayconv']]; ?>">
-                          <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_dayconv']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_dayconv']]; ?></font>
-                        </td>
-                      </tr>
-                    </tbody>
-                  <?php } else { ?>
-                  <?php } ?>
-                </table>
+                    </thead>
+
+                    <?php
+                    $aky_date = $_SESSION['aky_year'] . '-' . $_SESSION['aky_month'] . '-' . $_SESSION['aky_day'];
+                    $where101 = '';
+                    $sql101 = '';
+                    $result101 = '';
+                    $where101 .= "aky_date = '" . $aky_date . "' and ";
+                    $where101 .= '1 = 1';
+                    $sql101 = "select * from aurakoyomi where $where101";
+                    $result101 = mysqli_query($link1, $sql101) or die('query error274' . mysqli_error($link1));
+                    $num_rows101 = mysqli_num_rows($result101);
+
+                    ?>
+                    <?php if ($num_rows101 > '0') { ?>
+                      <?php $aurakoyomi = mysqli_fetch_array($result101); ?>
+                      <tbody>
+                        <tr>
+                          <td class="huntsys1"><?php echo $aura10_tbl[$aurakoyomi['aky_year10']]; ?></td>
+                          <td class="huntsys1"><?php echo $aura12_tbl[$aurakoyomi['aky_year12']]; ?></td>
+                          <td class="huntsys1"><?php echo $aura10_tbl[$aurakoyomi['aky_month10']]; ?></td>
+                          <td class="huntsys1"><?php echo $aura12_tbl[$aurakoyomi['aky_month12']]; ?></td>
+                          <td class="huntsys1"><?php echo $aura10_tbl[$aurakoyomi['aky_day10']]; ?></td>
+                          <td class="huntsys1"><?php echo $aura12_tbl[$aurakoyomi['aky_day12']]; ?></td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr>
+                          <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_year10']]; ?>">
+                            <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_year10']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_year10']]; ?></font>
+                          </td>
+                          <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_yearconv']]; ?>">
+                            <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_yearconv']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_yearconv']]; ?></font>
+                          </td>
+                          <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_month10']]; ?>">
+                            <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_month10']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_month10']]; ?></font>
+                          </td>
+                          <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_monthconv']]; ?>">
+                            <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_monthconv']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_monthconv']]; ?></font>
+                          </td>
+                          <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_day10']]; ?>">
+                            <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_day10']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_day10']]; ?></font>
+                          </td>
+                          <td class="huntsys1" bgcolor="#<?php echo $bgcolor10_tbl[$aurakoyomi['aky_dayconv']]; ?>">
+                            <font color="#<?php echo $fontcolor10_tbl[$aurakoyomi['aky_dayconv']]; ?>"><?php echo $kishitsu10_tbl[$aurakoyomi['aky_dayconv']]; ?></font>
+                          </td>
+                        </tr>
+                      </tbody>
+                    <?php } else { ?>
+                    <?php } ?>
+                  </table>
+                </div>
               </div>
 
 
@@ -276,53 +290,57 @@ if (isset($_POST['syori'])) {
               <!-- /.box-header -->
               <div class="box-body">
                 <h3>色見本</h3>
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th class="huntsys1">&nbsp;</th>
-                      <th class="huntsys1">木</th>
-                      <th class="huntsys1">火</th>
-                      <th class="huntsys1">土</th>
-                      <th class="huntsys1">金</th>
-                      <th class="huntsys1">水</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th class="huntsys1">陽(＋)</th>
-                      <td class="huntsys1" bgcolor="#1822C1">
-                        <font color="#FFFFFF">木(＋)wood</font>
-                      </td>
-                      <td class="huntsys1" bgcolor="#FF0000">
-                        <font color="#FFFFFF">火(＋)fire</font>
-                      </td>
-                      <td class="huntsys1" bgcolor="#8A4115">
-                        <font color="#FFFFFF">土(＋)earth</font>
-                      </td>
-                      <td class="huntsys1" bgcolor="#A0955E">
-                        <font color="#FFFFFF">金(＋)metal</font>
-                      </td>
-                      <td class="huntsys1" bgcolor="#000000">
-                        <font color="#FFFFFF">水(＋)water</font>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th class="huntsys1">陰(ー)</th>
-                      <td class="huntsys1" bgcolor="#90A4F2">木(ー)wood</td>
-                      <td class="huntsys1" bgcolor="#F64A71">火(ー)fire</td>
-                      <td class="huntsys1" bgcolor="#E3EB0B">土(ー)earth</td>
-                      <td class="huntsys1" bgcolor="#FFFFFF">金(ー)metal</td>
-                      <td class="huntsys1" bgcolor="#949494">水(ー)water</td>
-                    </tr>
+                <div class="table-wrap">
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th class="huntsys1">&nbsp;</th>
+                        <th class="huntsys1">木</th>
+                        <th class="huntsys1">火</th>
+                        <th class="huntsys1">土</th>
+                        <th class="huntsys1">金</th>
+                        <th class="huntsys1">水</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class="huntsys1">陽(＋)</th>
+                        <td class="huntsys1" bgcolor="#1822C1">
+                          <font color="#FFFFFF">木(＋)wood</font>
+                        </td>
+                        <td class="huntsys1" bgcolor="#FF0000">
+                          <font color="#FFFFFF">火(＋)fire</font>
+                        </td>
+                        <td class="huntsys1" bgcolor="#8A4115">
+                          <font color="#FFFFFF">土(＋)earth</font>
+                        </td>
+                        <td class="huntsys1" bgcolor="#A0955E">
+                          <font color="#FFFFFF">金(＋)metal</font>
+                        </td>
+                        <td class="huntsys1" bgcolor="#000000">
+                          <font color="#FFFFFF">水(＋)water</font>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="huntsys1">陰(ー)</th>
+                        <td class="huntsys1" bgcolor="#90A4F2">木(ー)wood</td>
+                        <td class="huntsys1" bgcolor="#F64A71">火(ー)fire</td>
+                        <td class="huntsys1" bgcolor="#E3EB0B">土(ー)earth</td>
+                        <td class="huntsys1" bgcolor="#FFFFFF">金(ー)metal</td>
+                        <td class="huntsys1" bgcolor="#949494">水(ー)water</td>
+                      </tr>
 
-                  </tbody>
-                </table>
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
               <!-- /.box-body -->
             </div>
             <?php if ($_SESSION['passwd'] == '3753' || $_SESSION['passwd'] == '9876') { ?>
-              <img src="../../dist/img/roominr_12table.png" alt="干支画像">
+              <div class="eto-img-wrap">
+                <img srcset="../../dist/img/roominr_12table.png 590w" sizes="(max-width:960px) 87vw, 590px" src="../../dist/img/roominr_12table.png" alt="干支画像" class="img">
+              </div>
             <?php } ?>
             <!-- /.box -->
 
