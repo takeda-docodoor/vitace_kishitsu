@@ -164,13 +164,13 @@ if (isset($_GET['action'])) {
       width: 50%;
       background-color: #FFFFFF;
 
-      @media screen and (max-width:768px) {
+      @media screen and (max-width:960px) {
         width: 100%;
       }
     }
 
     .box-body {
-      @media screen and (max-width:768px) {
+      @media screen and (max-width:960px) {
         overflow: scroll;
       }
 
