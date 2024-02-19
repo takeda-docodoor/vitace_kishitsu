@@ -145,14 +145,14 @@ if (isset($_POST['syori'])) {
     }
 
     .table-wrap {
-      @media screen and (max-width:960px) {
-        max-width: 100%;
-        overflow: scroll;
-      }
+      max-width: 100%;
+      overflow: scroll;
     }
 
     .eto-img-wrap {
+      margin-top: 20px;
       .img {
+        max-width: 100%;
         @media screen and (max-width:960px) {
           width: 100%;
         }
