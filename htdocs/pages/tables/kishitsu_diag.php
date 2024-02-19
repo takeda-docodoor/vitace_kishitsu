@@ -337,7 +337,7 @@ if (isset($_POST['syori'])) {
 
               <!-- /.box-body -->
             </div>
-            <?php if ($_SESSION['passwd'] == '3753' || $_SESSION['passwd'] == '9876') { ?>
+            <?php if ($_SESSION['passwd'] == $passwd_img || $_SESSION['passwd'] == $passwd_mng) { ?>
               <div class="eto-img-wrap">
                 <img srcset="../../dist/img/roominr_12table.png 590w" sizes="(max-width:960px) 87vw, 590px" src="../../dist/img/roominr_12table.png" alt="干支画像" class="img">
               </div>
