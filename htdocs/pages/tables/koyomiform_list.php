@@ -170,10 +170,12 @@ if (isset($_GET['action'])) {
     }
 
     .box-body {
-      @media screen and (max-width:1024px) {
-        overflow: scroll;
-      }
 
+    }
+
+    .table-wrap {
+      max-width: 100%;
+      overflow: scroll;
     }
   </style>
 
@@ -251,64 +253,66 @@ if (isset($_GET['action'])) {
               <!-- /.box-header -->
               <div class="box-body">
                 月切替日は干支切替日と変換切替日の両方を設定します。
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th class="huntsys1">年</th>
-                      <th class="huntsys1">年切替</th>
-                      <th class="huntsys1">１月</th>
-                      <th class="huntsys1">２月</th>
-                      <th class="huntsys1">３月</th>
-                      <th class="huntsys1">４月</th>
-                      <th class="huntsys1">５月</th>
-                      <th class="huntsys1">６月</th>
-                      <th class="huntsys1">７月</th>
-                      <th class="huntsys1">８月</th>
-                      <th class="huntsys1">９月</th>
-                      <th class="huntsys1">１０月</th>
-                      <th class="huntsys1">１１月</th>
-                      <th class="huntsys1">１２月</th>
-                      <th class="huntsys1" colspan="4">選択</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <?php
-                    $where101 = '';
-                    $sql101 = '';
-                    $result101 = '';
-                    $where101 .= "kfm_year > '" . '0' . "' and ";
-                    $where101 .= '1 = 1';
-                    $sql101 = "select * from koyomiform where $where101 order by kfm_year";
-                    $result101 = mysqli_query($link1, $sql101) or die('query error635' . mysqli_error($link1));
-
-                    ?>
-                    <?php $m = 0;
-                    while ($koyomiform = mysqli_fetch_array($result101)) { ?>
+                <div class="table-wrap">
+                  <table class="table table-bordered table-hover">
+                    <thead>
                       <tr>
-                        <td class="huntsys1"><?php echo $koyomiform['kfm_year']; ?></td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgyear'], 5, 2); ?>月<?php echo substr($koyomiform['kfm_chgyear'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgjan'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convjan'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgfeb'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convfeb'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgmar'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convmar'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgapr'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convapr'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgmay'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convmay'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgjun'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convjun'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgjul'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convjul'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgaug'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convaug'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgsep'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convsep'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgoct'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convoct'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgnov'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convnov'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgdec'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convdec'], 8, 2); ?>日</td>
-                        <td class="huntsys1"><a href="aurakoyomi_list.php?koyomiform_id=<?php echo $koyomiform['koyomiform_id'] ?>&action=seisei" alt="生成" title="データを生成します。" onClick="return confirm( 'データを生成します。よろしいですか？' )">生成</a></td>
-                        <td class="huntsys1"><a href="aurakoyomi_list.php?koyomiform_id=<?php echo $koyomiform['koyomiform_id'] ?>&action=disp" alt="表示">表示</a></td>
-                        <td class="huntsys1"><a href="javascript:navi_win( '<?php echo $koyomiform['koyomiform_id'] ?>' )">編集</a></td>
-                        <td class="huntsys1"><a href="koyomiform_list.php?koyomiform_id=<?php echo $koyomiform['koyomiform_id'] ?>&action=koyomiformdel" alt="削除" title="データを削除します。" onClick="return confirm( 'データを削除します。よろしいですか？' )">削除</a></td>
+                        <th class="huntsys1">年</th>
+                        <th class="huntsys1">年切替</th>
+                        <th class="huntsys1">１月</th>
+                        <th class="huntsys1">２月</th>
+                        <th class="huntsys1">３月</th>
+                        <th class="huntsys1">４月</th>
+                        <th class="huntsys1">５月</th>
+                        <th class="huntsys1">６月</th>
+                        <th class="huntsys1">７月</th>
+                        <th class="huntsys1">８月</th>
+                        <th class="huntsys1">９月</th>
+                        <th class="huntsys1">１０月</th>
+                        <th class="huntsys1">１１月</th>
+                        <th class="huntsys1">１２月</th>
+                        <th class="huntsys1" colspan="4">選択</th>
                       </tr>
-                    <?php $m++;
-                    } ?>
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+
+                      <?php
+                      $where101 = '';
+                      $sql101 = '';
+                      $result101 = '';
+                      $where101 .= "kfm_year > '" . '0' . "' and ";
+                      $where101 .= '1 = 1';
+                      $sql101 = "select * from koyomiform where $where101 order by kfm_year";
+                      $result101 = mysqli_query($link1, $sql101) or die('query error635' . mysqli_error($link1));
+
+                      ?>
+                      <?php $m = 0;
+                      while ($koyomiform = mysqli_fetch_array($result101)) { ?>
+                        <tr>
+                          <td class="huntsys1"><?php echo $koyomiform['kfm_year']; ?></td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgyear'], 5, 2); ?>月<?php echo substr($koyomiform['kfm_chgyear'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgjan'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convjan'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgfeb'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convfeb'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgmar'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convmar'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgapr'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convapr'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgmay'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convmay'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgjun'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convjun'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgjul'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convjul'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgaug'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convaug'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgsep'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convsep'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgoct'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convoct'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgnov'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convnov'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><?php echo substr($koyomiform['kfm_chgdec'], 8, 2); ?>日／<?php echo substr($koyomiform['kfm_convdec'], 8, 2); ?>日</td>
+                          <td class="huntsys1"><a href="aurakoyomi_list.php?koyomiform_id=<?php echo $koyomiform['koyomiform_id'] ?>&action=seisei" alt="生成" title="データを生成します。" onClick="return confirm( 'データを生成します。よろしいですか？' )">生成</a></td>
+                          <td class="huntsys1"><a href="aurakoyomi_list.php?koyomiform_id=<?php echo $koyomiform['koyomiform_id'] ?>&action=disp" alt="表示">表示</a></td>
+                          <td class="huntsys1"><a href="javascript:navi_win( '<?php echo $koyomiform['koyomiform_id'] ?>' )">編集</a></td>
+                          <td class="huntsys1"><a href="koyomiform_list.php?koyomiform_id=<?php echo $koyomiform['koyomiform_id'] ?>&action=koyomiformdel" alt="削除" title="データを削除します。" onClick="return confirm( 'データを削除します。よろしいですか？' )">削除</a></td>
+                        </tr>
+                      <?php $m++;
+                      } ?>
+                    </tbody>
+                  </table>
+                </div>
                 <div class="box-footer">
                   <a href="javascript:navi_win1()"><button class="btn btn-primary">新規追加</button></a>
                 </div>
