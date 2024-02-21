@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  apache:
+    container_name: "roominr"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./htdocs:/var/www/html
+    ports:
+      - 8080:80
+
+  db:
+    image: mysql:latest
+    container_name: "roominr_database"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: roominr
+      MYSQL_DATABASE: ddtest004_vakishitsu
+      MYSQL_USER: roominr
+      MYSQL_PASSWORD: roominr
+    volumes:
+      - ./db/db_data:/var/lib/mysql
+      - ./db/sql:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "roominr_phpmyadmin"
+    ports:
+      - "8082:80"  # PHPMyAdminのポート
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+volumes:
+  db_data:

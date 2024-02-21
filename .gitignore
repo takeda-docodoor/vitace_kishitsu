@@ -35,3 +35,10 @@ db
 *.bk
 _bk_*
 _docs
+
+# config
+htdocs/config.php
+
+# git-ftp
+.git-ftp.log
+.git-ftp-ignore
