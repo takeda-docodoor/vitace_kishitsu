@@ -495,7 +495,13 @@ td.huntsys1 { text-align: center; }
 				$where101 .= "aky_date <= '" . $aura_ymdto . "' and ";
 				$where101 .= '1 = 1';
 				$sql101 = "select * from aurakoyomi where $where101 order by aky_date";
-				$result101 = mysqli_query( $link1, $sql101 ) or die('query error274' . mysqli_error($link1));
+				$result101 = mysqli_query( $link1, $sql101 );
+
+        if (!$result101) {
+          $errorMessage = mysqli_error($link1);
+          // die('query error274' . $errorMessage);
+          die();
+        }
 
 			  ?>
 			  <?php $m = 0; while ( $aurakoyomi = mysqli_fetch_array( $result101 ) ) { ?>
