@@ -217,8 +217,15 @@ td.huntsys1 { text-align: center; }
 			$where101 .= "aky_date = '" . $aky_date . "' and ";
 			$where101 .= '1 = 1';
 			$sql101 = "select * from aurakoyomi where $where101";
-			$result101 = mysqli_query( $link1, $sql101 ) or die('query error274' . mysqli_error($link1));
-			$num_rows101 = mysqli_num_rows( $result101 );
+			$result101 = mysqli_query( $link1, $sql101 );
+
+      if (!$result101) {
+        $errorMessage = mysqli_error($link1);
+        // die('query error274' . $errorMessage);
+        die();
+      } else {
+        $num_rows101 = mysqli_num_rows( $result101 );
+      }
 
 		  ?>
           <!-- Profile Image -->
