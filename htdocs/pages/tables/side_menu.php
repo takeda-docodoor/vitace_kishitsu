@@ -1,6 +1,6 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        
+
       <?php if ( $_SESSION['passwd'] == '9876' ) { ?>
 			　<?php if ( $_SESSION['sidemenu'] == 'rstudent_list' || $_SESSION['sidemenu'] == 'rstudent_class' ) { ?><li class="treeview active"><?php } else { ?><li class="treeview"><?php } ?>
 				  <a href="rstudent_list.php">
@@ -14,7 +14,11 @@
 			    </ul>
 			  </li>
       <?php } ?>
-			  <?php if ( $_SESSION['sidemenu'] == 'kishitsu_diag' ) { ?><li class="treeview active"><?php } else { ?><li class="treeview"><?php } ?>
+			  <?php if ( $_SESSION['sidemenu'] == 'kishitsu_diag' ) { ?>
+          <li class="treeview active">
+        <?php } else { ?>
+          <li class="treeview active">
+        <?php } ?>
 				  <a href="kishitsu_diag.php">
 					<i class="fa fa-home"></i> <span>氣質</span>
 					<span class="pull-right-container">
@@ -22,7 +26,11 @@
 						</span>
 				  </a>
 				  <ul class="treeview-menu">
-					<?php if ( $_SESSION['sidemenu'] == 'kishitsu_diag' ) { ?><li class="active"><?php } else { ?><li><?php } ?><a href=kishitsu_diag.php><i class="fa fa-circle-o"></i>氣質情報</a></li>
+					<?php if ( $_SESSION['sidemenu'] == 'kishitsu_diag11' ) { ?>
+            <li class="treeview active">
+              <a href=kishitsu_diag11.php><i class="fa fa-circle-o"></i>氣質情報</a>
+            </li>
+          <?php } ?>
 				  </ul>
 			  </li>
       </ul>
